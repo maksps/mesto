@@ -1,0 +1,10 @@
+.profile{
+  display: grid;
+  padding-top: 40px;
+  grid-template-areas:
+  "avatar name edit add"
+  "avatar text text add";
+  grid-template-columns: max-content 1fr 1fr max-content;
+  grid-template-rows: max-content max-content;
+  align-items: center;
+}
