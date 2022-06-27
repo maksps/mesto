@@ -7,4 +7,33 @@
   grid-template-columns: max-content 1fr 1fr max-content;
   grid-template-rows: max-content max-content;
   align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px){
+  .profile{
+      grid-template-areas:
+      "avatar name edit"
+      "avatar text  ."
+      "add add add";
+      grid-template-columns: max-content max-content 1fr;
+      grid-template-rows: max-content max-content max-content;
+      /* justify-items: center; */
+  }
+
+}
+
+@media screen and (max-width: 460px){
+  .profile{
+    display: grid;
+      grid-template-areas:
+      "avatar avatar"
+      "name edit"
+      "text text "
+      "add add ";
+      grid-template-columns: 1fr  max-content;
+      grid-template-rows: max-content max-content max-content max-content;
+      /* justify-items: center; */
+  }
+
 }
