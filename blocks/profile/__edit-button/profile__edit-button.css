@@ -5,6 +5,7 @@
   width: 24px;
   height: 24px;
   grid-area: edit;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 460px) {
