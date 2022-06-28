@@ -1,0 +1,12 @@
+.popup__btn-exit{
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  right: -8px;
+  top: -8px;
+  transform: translate(100%, -100%);
+  background-image: url(../../../images/Close\ Icon.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+}
