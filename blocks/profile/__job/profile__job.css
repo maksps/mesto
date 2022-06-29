@@ -1,18 +1,18 @@
-.profile__text{
+.profile__job{
 margin: 0;
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
-line-height: calc(22/18);
+line-height: 1.22;
 color: #FFFFFF;
 grid-area: text;
 }
 
 
 @media screen and (max-width: 460px) {
-  .profile__text{
+  .profile__job{
     font-size: 14px;
-    line-height: calc(17/14);
+    line-height: 1.21;
     margin-top: 14px;
     max-width: 282px;
   }

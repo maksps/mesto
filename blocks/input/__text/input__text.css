@@ -10,3 +10,10 @@
   height: 27px;
 
 }
+
+@media screen and (max-width: 560px) {
+  .input__text{
+    width: 238px;
+    height: 27px;
+  }
+  }

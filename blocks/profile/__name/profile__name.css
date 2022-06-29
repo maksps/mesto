@@ -5,6 +5,7 @@
   line-height: 1.14;
   color: #FFFFFF;
   min-width: 294px;
+  max-width: 380px;
   /* grid-area: name; */
 }
 

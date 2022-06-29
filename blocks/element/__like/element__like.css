@@ -1,5 +1,12 @@
 .element__like{
-  width: 22px;
+  min-width: 22px;
   height: 19px;
   margin: 31px 20px 30px 0;
+  background-image: url('../../../images/like-element.svg');
+  background-size: cover;
+  overflow: visible;
+}
+
+.element__like:hover{
+cursor: pointer;
 }

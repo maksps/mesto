@@ -35,7 +35,7 @@
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button"><img src="./images/Edit Button.svg" alt="кнопка редактировать"></button>
         </div>
-        <p class="profile__text">Исследователь океана</p>
+        <p class="profile__job">Исследователь океана</p>
         <button class="profile__add-button" onclick="myDialog.close()"><img class="profile__add-image" src="./images/add-button.svg" alt="кнопка добавить"></button>
 
 
@@ -45,54 +45,57 @@
           <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
           <figcaption class="element__figcaption">
             <p class="element__text">Карачаевск</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like  element__like_unchecked "><div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/elbrus-element.png" alt="Гора эльбрус">
           <figcaption class="element__figcaption">
             <p class="element__text">Гора Эльбрус</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like element__like_unchecked "><div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
           <figcaption class="element__figcaption">
             <p class="element__text">Домбай</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like  element__like_unchecked "><div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/elbrus-element.png" alt="Гора Эльбрус">
           <figcaption class="element__figcaption">
             <p class="element__text">Гора Эльбрус</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like  element__like_unchecked "><div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
           <figcaption class="element__figcaption">
             <p class="element__text">Домбай</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like  element__like_unchecked "><div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
           <figcaption class="element__figcaption">
             <p class="element__text">Карачаево-Черкессия</p>
-            <img class="element__like" src="./images/like-element.svg" alt="лайк">
+            <div class="element__like  element__like_unchecked "><div>
           </figcaption>
         </figure>
       </section>
       <div class="popup">
         <div class="popup__container">
           <h3 class="popup__title">Редактировать профиль</h3>
+          <form class="popup__form" action="" type="submit">
           <div class="input">
-          <input type="text" placeholder="Жак-Ив Кусто" class="input__text input__text_type_name" >
-          <input type="text" placeholder="Исследователь океана" class="input__text input__text_type_text">
+          <input type="text" placeholder="Имя" class="input__text input__text_type_name" >
+          <input type="text" placeholder="О себе" class="input__text input__text_type_job">
           </div>
-          <button class="popup__btn-save">Сохранить</button>
-          <button class="popup__btn-exit"></button>
+          <!-- <input class="popup__btn-save" type="submit" value="Сохранить"> -->
+          <button class="popup__btn-save"> Сохранить</button>
+        </form>
+          <button class="popup__btn-exit" type="submit"></button>
 
         </div>
       </div>
@@ -103,7 +106,7 @@
     </footer>
 
   </div>
-
+<script src="./script/script.js"></script>
 </body>
 
 </html>
