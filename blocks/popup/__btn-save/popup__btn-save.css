@@ -12,9 +12,7 @@
   border-radius: 2px;
   cursor: pointer;
   transition: opacity 0.2s linear;
-
-
-}
+  }
 
 .popup__btn-save:hover {
   opacity: 0.8;

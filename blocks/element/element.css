@@ -3,8 +3,8 @@
   flex-direction: column;
   background-color: white;
   width: 100%;
-  /* max-width: 282px;
-  max-height: 361px; */
+  max-width: 282px;
+  max-height: 361px; 
   margin: 0;
   border-radius: 2%;
   overflow: hidden;
