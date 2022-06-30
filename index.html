@@ -2,25 +2,15 @@
 <html lang="en">
 
 <head>
-
-  <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="author" content="Павел Максимов">
-
-    <meta name="keywords" content="Яндекс практикум">
-
-    <meta name="robots" content="index,follow">
-
-    <title>mesto</title>
-
-    <link rel="stylesheet" href="pages/index.css">
-
-  </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Павел Максимов">
+  <meta name="keywords" content="Яндекс практикум">
+  <meta name="robots" content="index,follow">
+  <title>mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 
 <body class="body">
   <div class="page">
@@ -36,7 +26,8 @@
           <button class="profile__edit-button"><img src="./images/Edit Button.svg" alt="кнопка редактировать"></button>
         </div>
         <p class="profile__job">Исследователь океана</p>
-        <button class="profile__add-button" onclick="myDialog.close()"><img class="profile__add-image" src="./images/add-button.svg" alt="кнопка добавить"></button>
+        <button class="profile__add-button" onclick="myDialog.close()"><img class="profile__add-image"
+            src="./images/add-button.svg" alt="кнопка добавить"></button> 
 
 
       </section>
@@ -45,56 +36,56 @@
           <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
           <figcaption class="element__figcaption">
             <p class="element__text">Карачаевск</p>
-            <div class="element__like  element__like_unchecked "><div>
+            <div class="element__like  element__like_unchecked "></div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/elbrus-element.png" alt="Гора эльбрус">
           <figcaption class="element__figcaption">
             <p class="element__text">Гора Эльбрус</p>
-            <div class="element__like element__like_unchecked "><div>
+            <div class="element__like element__like_unchecked "></div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
           <figcaption class="element__figcaption">
             <p class="element__text">Домбай</p>
-            <div class="element__like  element__like_unchecked "><div>
+            <div class="element__like  element__like_unchecked "></div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/elbrus-element.png" alt="Гора Эльбрус">
           <figcaption class="element__figcaption">
             <p class="element__text">Гора Эльбрус</p>
-            <div class="element__like  element__like_unchecked "><div>
+            <div class="element__like  element__like_unchecked "></div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
           <figcaption class="element__figcaption">
             <p class="element__text">Домбай</p>
-            <div class="element__like  element__like_unchecked "><div>
+            <div class="element__like  element__like_unchecked "></div>
           </figcaption>
         </figure>
         <figure class="element">
           <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
           <figcaption class="element__figcaption">
             <p class="element__text">Карачаево-Черкессия</p>
-            <div class="element__like  element__like_unchecked "><div>
+            <div class="element__like  element__like_unchecked "></div>
           </figcaption>
         </figure>
       </section>
       <div class="popup">
         <div class="popup__container">
           <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form" action="" type="submit">
-          <div class="input">
-          <input type="text" placeholder="Имя" class="input__text input__text_type_name" >
-          <input type="text" placeholder="О себе" class="input__text input__text_type_job">
-          </div>
-          <!-- <input class="popup__btn-save" type="submit" value="Сохранить"> -->
-          <button class="popup__btn-save"> Сохранить</button>
-        </form>
+          <form class="popup__form">
+            <div class="input">
+              <input type="text" placeholder="Имя" class="input__text input__text_type_name">
+              <input type="text" placeholder="О себе" class="input__text input__text_type_job">
+            </div>
+
+            <button class="popup__btn-save"> Сохранить</button>
+          </form>
           <button class="popup__btn-exit" type="submit"></button>
 
         </div>
@@ -106,7 +97,9 @@
     </footer>
 
   </div>
-<script src="./script/script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 
 </html>
+
+
