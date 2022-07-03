@@ -1,6 +1,7 @@
 .header {
 display: flex;
-margin:  auto;
+flex: auto;
+margin-left:  0;
 border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
