@@ -1,9 +1,9 @@
-.profile{
+.profile {
   display: grid;
   padding-top: 40px;
   grid-template-areas:
-  "avatar info add"
-  "avatar text add";
+    "avatar info add"
+    "avatar text add";
   grid-template-columns: max-content 1fr max-content;
   grid-template-rows: max-content max-content;
   align-items: center;
@@ -11,30 +11,27 @@
   column-gap: 10px;
 }
 
-@media screen and (max-width: 768px){
-  .profile{
-      grid-template-areas:
+@media screen and (max-width: 768px) {
+  .profile {
+    grid-template-areas:
       "avatar info"
       "avatar text"
       "add add";
-      grid-template-columns: max-content  1fr;
-      grid-template-rows: max-content max-content max-content;
-      /* justify-items: center; */
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content max-content max-content;
   }
-
 }
 
-@media screen and (max-width: 460px){
-  .profile{
-    display: grid;
-      grid-template-areas:
+@media screen and (max-width: 460px) {
+  .profile {
+    grid-template-areas:
       "avatar"
       "info"
       "text"
       "add";
-      grid-template-columns: 1fr;
-      grid-template-rows: max-content max-content max-content max-content;
-      justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content max-content max-content;
+    justify-items: center;
   }
 
 }

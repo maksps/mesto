@@ -4,6 +4,11 @@
   margin: 31px 20px 29px 0;
   background-size: cover;
   overflow: visible;
+  border: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  background-color: transparent;
 }
 
 .element__like:hover {

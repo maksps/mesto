@@ -4,8 +4,6 @@
   position: relative;
   margin-left: calc(200/1280*100%);
   margin-right: calc(200/1280*100%);
-  /* max-width: 880px;
-  margin: auto; */
 }
 
 @media screen and (max-width:1025px) {

@@ -11,11 +11,9 @@
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-
 <body class="body">
   <div class="page">
     <header class="header">
-
       <img class="header__logo" src="./images/logo-header.svg" alt="логотип">
     </header>
     <main class="main">
@@ -23,79 +21,76 @@
         <img class="profile__avatar" src="./images/kusto-avatar.png" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"><div class="profile__edit-btn-image" aria-label="edit"></div></button>
+          <button class="profile__edit-button" type="button">
+            <div class="profile__edit-btn-image" aria-label="edit"></div>
+          </button>
         </div>
         <p class="profile__job">Исследователь океана</p>
-        <button class="profile__add-button" onclick="myDialog.close()" aria-label="add"><img class="profile__add-image"
-            src="./images/add-button.svg" alt="кнопка добавить"></button>
-
-
+        <button class="profile__add-button" type="button" aria-label="add">
+          <div class="profile__add-image"></div>
+        </button>
       </section>
       <section class="elements">
-        <figure class="element">
+        <div class="element">
           <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Карачаевск</p>
-            <div class="element__like  element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-        <figure class="element">
-          <img class="element__image" src="./images/elbrus-element.png" alt="Гора эльбрус">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Гора Эльбрус</p>
-            <div class="element__like element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-        <figure class="element">
-          <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Домбай</p>
-            <div class="element__like  element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-        <figure class="element">
-          <img class="element__image" src="./images/izhevsk-element.jpg" alt="Ижевск">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Ижевск</p>
-            <div class="element__like  element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-        <figure class="element">
-          <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Домбай</p>
-            <div class="element__like  element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-        <figure class="element">
-          <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
-          <figcaption class="element__figcaption">
-            <p class="element__text">Карачаево-Черкессия</p>
-            <div class="element__like  element__like_unchecked "></div>
-          </figcaption>
-        </figure>
-      </section>
-      <div class="popup">
-        <div class="popup__container">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form">
-            <div class="input">
-              <input type="text" placeholder="Имя" class="input__text input__text_type_name">
-              <input type="text" placeholder="О себе" class="input__text input__text_type_job">
-            </div>
-
-            <button class="popup__btn-save"> Сохранить</button>
-          </form>
-          <button class="popup__btn-exit" type="submit" aria-label="exit"></button>
-
+          <div class="element__figcaption">
+            <h2 class="element__text">Карачаевск</h2>
+            <button type="button" class="element__like  element__like_unchecked "></button>
+          </div>
         </div>
-      </div>
+        <div class="element">
+          <img class="element__image" src="./images/elbrus-element.png" alt="Гора эльбрус">
+          <div class="element__figcaption">
+            <h2 class="element__text">Гора Эльбрус</h2>
+            <button type="button" class="element__like element__like_unchecked "></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
+          <div class="element__figcaption">
+            <h2 class="element__text">Домбай</h2>
+            <button type="button" class="element__like  element__like_unchecked "></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/izhevsk-element.jpg" alt="Ижевск">
+          <div class="element__figcaption">
+            <h2 class="element__text">Ижевск</h2>
+            <button type="button" class="element__like  element__like_unchecked "></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/dombay-element.png" alt="Домбай">
+          <div class="element__figcaption">
+            <h2 class="element__text">Домбай</h2>
+            <button type="button" class="element__like  element__like_unchecked "></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/karachaevsk-element.jpg" alt="Карачаевск">
+          <div class="element__figcaption">
+            <h2 class="element__text">Карачаево-Черкессия</h2>
+            <button type="button" class="element__like  element__like_unchecked "></button>
+          </div>
+        </div>
+      </section>
     </main>
     <footer class="footer">
-      <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
-
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-
+    <div class="popup">
+      <div class="popup__container">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="popup__form"  name="profileEdit">
+          <div class="input">
+            <input type="text" placeholder="Имя" name="nameInput" required class="input__text input__text_type_name">
+            <input type="text" placeholder="О себе" name="jobInput" class="input__text input__text_type_job">
+          </div>
+          <button class="popup__btn-save" type="submit"> Сохранить</button>
+        </form>
+        <button class="popup__btn-exit" type="button" aria-label="exit"></button>
+      </div>
+    </div>
   </div>
   <script src="./script/index.js"></script>
 </body>

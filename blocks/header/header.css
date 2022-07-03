@@ -1,12 +1,12 @@
 .header {
-display: flex;
-flex: auto;
-margin-left:  0;
-border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  flex: auto;
+  margin-left: 0;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 460px) {
-  .header{
+  .header {
     margin: 0 -19px 0 -19px;
   }
 
