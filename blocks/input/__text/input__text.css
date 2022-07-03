@@ -1,5 +1,7 @@
 .input__text {
-  margin-bottom: 30px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  padding: 0;
+  margin-bottom: 25px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.21;
@@ -7,13 +9,15 @@
   border: 0;
   border-bottom: 1px inset rgba(0, 0, 0, .2);
   width: 358px;
-  height: 27px;
+  min-height: 32px;
+  box-sizing: border-box;
 
 }
 
 @media screen and (max-width: 560px) {
-  .input__text{
+  .input__text {
     width: 238px;
-    height: 27px;
+    min-height: 33px;
+    margin-bottom: 23px;
   }
-  }
+}

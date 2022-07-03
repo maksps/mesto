@@ -16,17 +16,17 @@
   <div class="page">
     <header class="header">
 
-      <img class="header__logo" src="./images/logo-header.png" alt="логотип">
+      <img class="header__logo" src="./images/logo-header.svg" alt="логотип">
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/kusto-avatar.png" alt="Кусто">
+        <img class="profile__avatar" src="./images/kusto-avatar.png" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"><img src="./images/edit-button.png" alt="кнопка редактировать"></button>
+          <button class="profile__edit-button"><div class="profile__edit-btn-image" aria-label="edit"></div></button>
         </div>
         <p class="profile__job">Исследователь океана</p>
-        <button class="profile__add-button" onclick="myDialog.close()"><img class="profile__add-image"
+        <button class="profile__add-button" onclick="myDialog.close()" aria-label="add"><img class="profile__add-image"
             src="./images/add-button.svg" alt="кнопка добавить"></button>
 
 
@@ -86,7 +86,7 @@
 
             <button class="popup__btn-save"> Сохранить</button>
           </form>
-          <button class="popup__btn-exit" type="submit"></button>
+          <button class="popup__btn-exit" type="submit" aria-label="exit"></button>
 
         </div>
       </div>
@@ -97,9 +97,7 @@
     </footer>
 
   </div>
-  <script src="./script/script.js"></script>
+  <script src="./script/index.js"></script>
 </body>
 
 </html>
-
-

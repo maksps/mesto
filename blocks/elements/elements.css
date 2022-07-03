@@ -1,4 +1,4 @@
-.elements{
+.elements {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   padding-top: 51px;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .elements{
+  .elements {
     grid-template-columns: repeat(2, 1fr);
     max-width: fit-content;
   }
@@ -17,8 +17,9 @@
 
 
 @media screen and (max-width: 460px) {
-  .elements{
+  .elements {
     grid-template-columns: repeat(1, 1fr);
+    padding-top: 36px;
   }
 
 }

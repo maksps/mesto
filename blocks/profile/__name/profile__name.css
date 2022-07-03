@@ -6,12 +6,15 @@
   color: #FFFFFF;
   min-width: 294px;
   max-width: 380px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   /* grid-area: name; */
 }
 
 
 @media screen and (max-width: 600px) {
-  .profile__name{
+  .profile__name {
     font-size: 34px;
     min-width: 230px;
   }
@@ -19,11 +22,11 @@
 }
 
 @media screen and (max-width: 460px) {
-  .profile__name{
+  .profile__name {
     font-size: 27px;
     line-height: 1.22;
     min-width: 189px;
-    margin-left: 32px;
+    margin-left: 27px;
   }
 
 }

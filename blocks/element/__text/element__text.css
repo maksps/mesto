@@ -2,10 +2,12 @@
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
-  line-height: calc(29/24);
+  line-height: 1.2;
   color: #000000;
-  margin: 25px 0 31px 21px;
+  margin: 24px 0 26px 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 198px;
 }
+
