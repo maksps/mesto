@@ -1,3 +1,19 @@
 .main {
   flex: auto;
+  margin-left: calc(200/1280*100%);
+  margin-right: calc(200/1280*100%);
+}
+
+@media screen and (max-width:1025px) {
+  .main {
+    margin-left: calc(100/1280*100%);
+    margin-right: calc(100/1280*100%);
+  }
+}
+
+@media screen and (max-width:600px) {
+  .main {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
 }
