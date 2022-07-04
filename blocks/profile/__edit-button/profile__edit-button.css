@@ -3,6 +3,7 @@
   background-color: transparent;
   padding: 0;
   width: 24px;
+  min-width: 24px;
   height: 24px;
   grid-area: edit;
   cursor: pointer;
@@ -19,12 +20,17 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 600px) {
   .profile__edit-button {
+    background-size: 7.5px;
     width: 18px;
     height: 18px;
-    margin-left: 10px;
-    background-size: 7.5px;
+    min-width: 18px;
   }
+}
 
+@media screen and (max-width: 480px) {
+  .profile__edit-button {
+    margin-left: 10px;
+  }
 }

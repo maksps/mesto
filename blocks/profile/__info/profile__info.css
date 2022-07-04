@@ -8,8 +8,9 @@
 
 
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 480px) {
   .profile__info {
     margin-bottom: 9px;
+    max-width: 280px;
   }
 }

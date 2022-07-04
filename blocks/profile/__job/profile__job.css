@@ -14,11 +14,14 @@
 }
 
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 480px) {
   .profile__job {
     font-size: 14px;
     line-height: 1.21;
     max-width: 282px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
 }
