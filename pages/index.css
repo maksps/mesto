@@ -20,6 +20,7 @@
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_unchecked/element__like_unchecked.css);
 @import url(../blocks/element/__like/_checked/element__like_checked.css);
+@import url(../blocks/element/__btn-delete/element__btn-delete.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
