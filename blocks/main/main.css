@@ -2,6 +2,7 @@
   flex: auto;
   margin-left: calc(200/1280*100%);
   margin-right: calc(200/1280*100%);
+  min-height: 60vh;
 }
 
 @media screen and (max-width:1025px) {
@@ -15,5 +16,12 @@
   .main {
     margin-left: 19px;
     margin-right: 19px;
+    min-height: 60vh;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .main {
+    min-height: 70vh;
   }
 }
