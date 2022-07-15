@@ -13,7 +13,7 @@
   padding: 0;
   background-color: transparent;
   transition: opacity 0.2s linear;
-  z-index: 2;
+  z-index: 1;
 }
 
 .element__btn-delete:hover {
