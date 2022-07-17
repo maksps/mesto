@@ -1,8 +1,8 @@
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const editButton = document.querySelector('.profile__edit-button');
-const exitEditButton = popupEdit.querySelector('.popup__btn-exit');
-const exitAddButton = popupAdd.querySelector('.popup__btn-exit');
+// const exitEditButton = popupEdit.querySelector('.popup__btn-exit');
+// const exitAddButton = popupAdd.querySelector('.popup__btn-exit');
 const addButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -14,11 +14,10 @@ const formElement = popupEdit.querySelector('.popup__form');
 const formAdd = popupAdd.querySelector('.popup__form');
 const elements = document.querySelector('.elements');
 const popupPlace = document.querySelector('.popup_place');
-const exitPlaceButton = popupPlace.querySelector('.popup__btn-exit');
+// const exitPlaceButton = popupPlace.querySelector('.popup__btn-exit');
+// const exitButton = document.querySelectorAll('.popup__btn-exit');
+const popups = document.querySelectorAll('.popup');
 const exitButton = document.querySelectorAll('.popup__btn-exit');
-const popup = document.querySelectorAll('.popup');
-
-
 
 
 function createElement(name, link) {
@@ -34,12 +33,12 @@ function createElement(name, link) {
     popupPlace.classList.toggle('popup_opened');
     popupPlace.querySelector('.popup__image').src = link;
     popupPlace.querySelector('.popup__figcaption').textContent = name;
-    document.formAdd.reset();
-
   });
 
 
 }
+
+
 
 
 function addLike(event) {
@@ -74,11 +73,9 @@ function createInitialElements() {
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
-
   initialCards.forEach(function (item) {
     createElement(item.name, item.link)
   });
-
 }
 
 
@@ -95,22 +92,11 @@ function openPopupAdd() {
 }
 
 
-function closePopupEdit() {
-  popupEdit.classList.remove('popup_opened');
-}
-
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
-}
-
-function closePopupPlace() {
-  popupPlace.classList.remove('popup_opened');
-
-}
 
 function closePopup() {
-  popup.forEach(function (item) {
-    item.classList.remove('popup_opened');
+  popups.forEach(function (popup) {
+    popup.classList.remove('popup_opened');
+    // if(popup.classList.contains('popup_opened')){popup.classList.remove('popup_opened')};
   });
 }
 
@@ -131,13 +117,16 @@ function makeSubmitCreateElement(evt) {
 
 createInitialElements();
 editButton.addEventListener('click', openPopupEdit);
-addButton.addEventListener('click', openPopupAdd)
-exitEditButton.addEventListener('click', closePopupEdit);
-exitAddButton.addEventListener('click', closePopupAdd);
+addButton.addEventListener('click', openPopupAdd);
 formElement.addEventListener('submit', makeSubmitHandler);
 formAdd.addEventListener('submit', makeSubmitCreateElement);
-exitPlaceButton.addEventListener('click', closePopup);
 
+
+popups.forEach(function(popup){
+popup.addEventListener('click',function(event){
+    if(event.target.classList.contains('popup__btn-exit')){closePopup()};
+})
+});
 
 
 
