@@ -1,8 +1,6 @@
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const editButton = document.querySelector('.profile__edit-button');
-// const exitEditButton = popupEdit.querySelector('.popup__btn-exit');
-// const exitAddButton = popupAdd.querySelector('.popup__btn-exit');
 const addButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -14,11 +12,7 @@ const formElement = popupEdit.querySelector('.popup__form');
 const formAdd = popupAdd.querySelector('.popup__form');
 const elements = document.querySelector('.elements');
 const popupPlace = document.querySelector('.popup_place');
-// const exitPlaceButton = popupPlace.querySelector('.popup__btn-exit');
-// const exitButton = document.querySelectorAll('.popup__btn-exit');
 const popups = document.querySelectorAll('.popup');
-const exitButton = document.querySelectorAll('.popup__btn-exit');
-const buttons = document.querySelectorAll('.button');
 
 function createElement(name, link) {
   const template = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
@@ -26,23 +20,15 @@ function createElement(name, link) {
   elementImage.src = link;
   elementImage.alt = name;
   template.querySelector('.element__text').textContent = name;
-  elements.insertBefore(template, elements.firstChild);
-  template.querySelector('.element__btn-delete').addEventListener('click', () => { template.remove(); });
-  template.querySelector('.element__like').addEventListener('click', (event) => { event.target.classList.toggle('element__like_checked') });
-  template.querySelector('.element__image').addEventListener('click', function (event) {
-    openPopup(popupPlace);
+  template.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
+  template.querySelector('.element__like').addEventListener('click', addRemoveLike);
+  template.querySelector('.element__image').addEventListener('click', function () {
     popupPlace.querySelector('.popup__image').src = link;
     popupPlace.querySelector('.popup__figcaption').textContent = name;
+    openPopup(popupPlace);
   });
-
-
+  return template;
 }
-
-
-// function addLike(event) {
-//   template.querySelector('element__like').classList.toggle('element__like_checked');
-// }
-
 
 function createInitialElements() {
   const initialCards = [
@@ -72,25 +58,24 @@ function createInitialElements() {
     }
   ];
   initialCards.forEach(function (item) {
-    createElement(item.name, item.link)
+    elements.insertBefore(createElement(item.name, item.link), elements.firstChild);
   });
 }
-
-
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-
 function closePopup() {
   popups.forEach(function (popup) {
     popup.classList.remove('popup_opened');
-    // if(popup.classList.contains('popup_opened')){popup.classList.remove('popup_opened')};
   });
 }
 
-
+function deleteElement(event) {
+  const element = event.target.closest('.element');
+  element.remove();
+}
 
 function makeSubmitHandler(evt) {
   evt.preventDefault();
@@ -101,13 +86,30 @@ function makeSubmitHandler(evt) {
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  createElement(placeNameInput.value, linkInput.value);
+  elements.insertBefore(createElement(placeNameInput.value, linkInput.value), elements.firstChild);
   closePopup();
+  placeNameInput.value = '';
+  linkInput.value = '';
 }
+
+function addRemoveLike(event) {
+  const like = event.target.closest('.element__like');
+  like.classList.toggle('element__like_checked');
+}
+
+
 
 createInitialElements();
 formElement.addEventListener('submit', makeSubmitHandler);
 formAdd.addEventListener('submit', makeSubmitCreateElement);
+
+popups.forEach(function (popup) {
+  popup.addEventListener('click', function (event) {
+    if (event.target.classList.contains('popup__btn-exit')) {
+      closePopup()
+    }
+  })
+});
 
 
 popups.forEach(function (popup) {
@@ -118,20 +120,17 @@ popups.forEach(function (popup) {
   })
 });
 
-buttons.forEach(function (button) {
-  button.addEventListener('click', function (event) {
-    if (event.target.classList.contains('profile__edit-button')) {
-      nameInput.value = profileName.textContent;
-      jobInput.value = profileJob.textContent;
-      openPopup(popupEdit);
-    }
-    else if (event.target.classList.contains('profile__add-button')) {
-      placeNameInput.value = '';
-      linkInput.value = '';
-      openPopup(popupAdd);
-    }
-  })
+editButton.addEventListener('click', function () {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(popupEdit);
 });
+
+
+addButton.addEventListener('click', ()=> openPopup(popupAdd));
+
+
+
 
 
 
