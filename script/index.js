@@ -15,6 +15,7 @@ const popupPlace = document.querySelector('.popup_place');
 const popups = document.querySelectorAll('.popup');
 const popupImage = popupPlace.querySelector('.popup__image');
 const popupFigcaption = popupPlace.querySelector('.popup__figcaption');
+const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 
 function createElement(name, link) {
   const template = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
@@ -107,7 +108,7 @@ formAdd.addEventListener('submit', makeSubmitCreateElement);
 
 popups.forEach(function (popup) {
   popup.addEventListener('click', function (event) {
-    if (event.target.classList.contains('popup__btn-exit')) {
+    if (event.target.classList.contains('popup__btn-exit') || event.target.classList.contains('popup') ) {
       closePopup(event.target.closest('.popup'));
     }
   })
@@ -117,6 +118,7 @@ editButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
+  buttonSaveEdit.classList.remove('popup__btn-save_inactive')
 });
 
 
