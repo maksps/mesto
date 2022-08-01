@@ -112,6 +112,10 @@ popups.forEach(function (popup) {
       closePopup(event.target.closest('.popup'));
     }
   })
+  document.addEventListener('keydown', function (evt) {
+    if(evt.key === 'Escape'){
+      closePopup(popup);}
+    ;})
 });
 
 editButton.addEventListener('click', function () {
@@ -123,9 +127,6 @@ editButton.addEventListener('click', function () {
 
 
 addButton.addEventListener('click', () => openPopup(popupAdd));
-
-
-
 
 
 
