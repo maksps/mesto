@@ -10,3 +10,10 @@
   min-height: 25px;
   max-width: 358px;
 }
+
+@media screen and (max-width: 560px) {
+  .input__text {
+    width: 238px;
+
+  }
+}
