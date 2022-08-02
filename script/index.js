@@ -1,7 +1,7 @@
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+const buttonEdit = document.querySelector('.profile__edit-button');
+const buttonAdd = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const nameInput = popupEdit.querySelector('.input__text_type_name');
@@ -96,8 +96,8 @@ function makeSubmitCreateElement(evt) {
 }
 
 function addRemoveLike(event) {
-  const like = event.target.closest('.element__like');
-  like.classList.toggle('element__like_checked');
+  const elementLike = event.target.closest('.element__like');
+  elementLike.classList.toggle('element__like_checked');
 }
 
 
@@ -118,7 +118,7 @@ popups.forEach(function (popup) {
     ;})
 });
 
-editButton.addEventListener('click', function () {
+buttonEdit.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
@@ -126,7 +126,7 @@ editButton.addEventListener('click', function () {
 });
 
 
-addButton.addEventListener('click', () => openPopup(popupAdd));
+buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
 
 
