@@ -69,11 +69,19 @@ function createInitialElements() {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', function (evt) {
+    if(evt.key === 'Escape'){
+      closePopup(popup);}
+});
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-};
+  document.removeEventListener('keydown', function (evt) {
+    if(evt.key === 'Escape'){
+      closePopup(popup);}
+});
+}
 
 
 function deleteElement(event) {
@@ -92,8 +100,8 @@ function makeSubmitCreateElement(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createElement(placeNameInput.value, linkInput.value));
   closePopup(popupAdd);
-  placeNameInput.value = '';
-  linkInput.value = '';
+  formElementAdd.reset();
+
 }
 
 function addRemoveLike(event) {
@@ -110,13 +118,13 @@ formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 popups.forEach(function (popup) {
   popup.addEventListener('click', function (event) {
     if (event.target.classList.contains('popup__btn-exit') || event.target.classList.contains('popup') ) {
-      closePopup(event.target.closest('.popup'));
+      closePopup(popup);
     }
   })
-  document.addEventListener('keydown', function (evt) {
-    if(evt.key === 'Escape'){
-      closePopup(popup);}
-    ;})
+  // document.addEventListener('keydown', function (evt) {
+  //   if(evt.key === 'Escape'){
+  //     closePopup(popup);}
+  //   ;})
 });
 
 buttonEdit.addEventListener('click', function () {
