@@ -16,6 +16,7 @@ const popups = document.querySelectorAll('.popup');
 const popupImage = popupPlace.querySelector('.popup__image');
 const popupFigcaption = popupPlace.querySelector('.popup__figcaption');
 const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
+const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 const template = document.querySelector('.element-template').content.querySelector('.element');
 
 function createElement(name, link) {
@@ -81,6 +82,7 @@ function closePopup(popup) {
     if(evt.key === 'Escape'){
       closePopup(popup);}
 });
+
 }
 
 
@@ -101,7 +103,7 @@ function makeSubmitCreateElement(evt) {
   cardsContainer.prepend(createElement(placeNameInput.value, linkInput.value));
   closePopup(popupAdd);
   formElementAdd.reset();
-
+  buttonSaveAdd.classList.add('popup__btn-save_inactive');
 }
 
 function addRemoveLike(event) {
@@ -121,17 +123,13 @@ popups.forEach(function (popup) {
       closePopup(popup);
     }
   })
-  // document.addEventListener('keydown', function (evt) {
-  //   if(evt.key === 'Escape'){
-  //     closePopup(popup);}
-  //   ;})
 });
 
 buttonEdit.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
-  buttonSaveEdit.classList.remove('popup__btn-save_inactive')
+  buttonSaveEdit.classList.remove('popup__btn-save_inactive');
 });
 
 
