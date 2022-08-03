@@ -130,6 +130,7 @@ buttonEdit.addEventListener('click', function () {
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
   buttonSaveEdit.classList.remove('popup__btn-save_inactive');
+
 });
 
 
