@@ -8,30 +8,31 @@ const nameInput = popupEdit.querySelector('.input__text_type_name');
 const jobInput = popupEdit.querySelector('.input__text_type_job');
 const placeNameInput = popupAdd.querySelector('.input__text_type_placename');
 const linkInput = popupAdd.querySelector('.input__text_type_link');
-const formElement = popupEdit.querySelector('.popup__form');
-const formAdd = popupAdd.querySelector('.popup__form');
-const elements = document.querySelector('.elements');
+const formElementEdit = popupEdit.querySelector('.popup__form');
+const formElementAdd = popupAdd.querySelector('.popup__form');
+const cardsContainer = document.querySelector('.elements');
 const popupPlace = document.querySelector('.popup_place');
 const popups = document.querySelectorAll('.popup');
 const popupImage = popupPlace.querySelector('.popup__image');
 const popupFigcaption = popupPlace.querySelector('.popup__figcaption');
 const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
+const template = document.querySelector('.element-template').content.querySelector('.element');
 
 function createElement(name, link) {
-  const template = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
-  const elementImage = template.querySelector('.element__image');
+  const templateClone = template.cloneNode(true);
+  const elementImage = templateClone.querySelector('.element__image');
   elementImage.src = link;
   elementImage.alt = name;
-  template.querySelector('.element__text').textContent = name;
-  template.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
-  template.querySelector('.element__like').addEventListener('click', addRemoveLike);
-  template.querySelector('.element__image').addEventListener('click', function () {
+  templateClone.querySelector('.element__text').textContent = name;
+  templateClone.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
+  templateClone.querySelector('.element__like').addEventListener('click', addRemoveLike);
+  elementImage.addEventListener('click', function () {
     popupImage.src = link;
     popupImage.alt = name;
     popupFigcaption.textContent = name;
     openPopup(popupPlace);
   });
-  return template;
+  return templateClone;
 }
 
 function createInitialElements() {
@@ -62,7 +63,7 @@ function createInitialElements() {
     }
   ];
   initialCards.forEach(function (item) {
-    elements.prepend(createElement(item.name, item.link));
+    cardsContainer.prepend(createElement(item.name, item.link));
   });
 }
 
@@ -89,7 +90,7 @@ function makeSubmitHandler(evt) {
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  elements.prepend(createElement(placeNameInput.value, linkInput.value));
+  cardsContainer.prepend(createElement(placeNameInput.value, linkInput.value));
   closePopup(popupAdd);
   placeNameInput.value = '';
   linkInput.value = '';
@@ -102,8 +103,8 @@ function addRemoveLike(event) {
 
 
 createInitialElements();
-formElement.addEventListener('submit', makeSubmitHandler);
-formAdd.addEventListener('submit', makeSubmitCreateElement);
+formElementEdit.addEventListener('submit', makeSubmitHandler);
+formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 
 
 popups.forEach(function (popup) {
