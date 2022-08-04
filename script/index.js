@@ -19,6 +19,11 @@ const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 const template = document.querySelector('.element-template').content.querySelector('.element');
 
+function setInputEditFormValue() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+
 function createElement(name, link) {
   const templateClone = template.cloneNode(true);
   const elementImage = templateClone.querySelector('.element__image');
@@ -99,13 +104,17 @@ function makeSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   closePopup(popupEdit);
 }
+function resetFormElementAdd() {
+  formElementAdd.reset();
+  buttonSaveAdd.classList.add('popup__btn-save_inactive');
+  buttonSaveAdd.setAttribute('disabled', true);
+}
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createElement(placeNameInput.value, linkInput.value));
   closePopup(popupAdd);
-  formElementAdd.reset();
-  buttonSaveAdd.classList.add('popup__btn-save_inactive');
+  resetFormElementAdd();
 }
 
 function addRemoveLike(event) {
@@ -113,7 +122,7 @@ function addRemoveLike(event) {
   elementLike.classList.toggle('element__like_checked');
 }
 
-
+setInputEditFormValue();
 createInitialElements();
 formElementEdit.addEventListener('submit', makeSubmitHandler);
 formElementAdd.addEventListener('submit', makeSubmitCreateElement);
@@ -121,20 +130,15 @@ formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 
 popups.forEach(function (popup) {
   popup.addEventListener('click', function (event) {
-    if (event.target.classList.contains('popup__btn-exit') || event.target.classList.contains('popup') ) {
+    if (event.target.classList.contains('popup__btn-exit') || event.target.classList.contains('popup')) {
       closePopup(popup);
     }
   })
 });
 
 buttonEdit.addEventListener('click', function () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
-  buttonSaveEdit.classList.remove('popup__btn-save_inactive');
-
 });
-
 
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
