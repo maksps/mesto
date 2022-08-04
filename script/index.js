@@ -68,21 +68,23 @@ function createInitialElements() {
   });
 }
 
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', function (evt) {
-    if(evt.key === 'Escape'){
-      closePopup(popup);}
-});
+  document.addEventListener('keydown', closeByEsc)
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', function (evt) {
-    if(evt.key === 'Escape'){
-      closePopup(popup);}
-});
+  document.removeEventListener('keydown', closeByEsc)
+};
 
+
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 }
 
 
