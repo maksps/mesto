@@ -1,3 +1,5 @@
+import {Card} from './Сard.js';
+
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -19,29 +21,33 @@ const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 const template = document.querySelector('.element-template').content.querySelector('.element');
 
+
 function setInputEditFormValue() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
-function createElement(name, link) {
-  const templateClone = template.cloneNode(true);
-  const elementImage = templateClone.querySelector('.element__image');
-  elementImage.src = link;
-  elementImage.alt = name;
-  templateClone.querySelector('.element__text').textContent = name;
-  templateClone.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
-  templateClone.querySelector('.element__like').addEventListener('click', addRemoveLike);
-  elementImage.addEventListener('click', function () {
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupFigcaption.textContent = name;
-    openPopup(popupPlace);
-  });
-  return templateClone;
-}
+
+
+// function createElement(name, link) {
+//   const card = template.cloneNode(true);
+//   const elementImage = card.querySelector('.element__image');
+//   elementImage.src = link;
+//   elementImage.alt = name;
+//   card.querySelector('.element__text').textContent = name;
+//   card.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
+//   card.querySelector('.element__like').addEventListener('click', addRemoveLike);
+//   elementImage.addEventListener('click', function () {
+//     popupImage.src = link;
+//     popupImage.alt = name;
+//     popupFigcaption.textContent = name;
+//     openPopup(popupPlace);
+//   });
+//   return card;
+// }
 
 function createInitialElements() {
+  
   const initialCards = [
     {
       name: 'Архыз',
@@ -67,9 +73,12 @@ function createInitialElements() {
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
+
   ];
+  
   initialCards.forEach(function (item) {
-    cardsContainer.prepend(createElement(item.name, item.link));
+    const card = new Card(item.name, item.link, template );
+    cardsContainer.prepend(card.createCard());
   });
 }
 
@@ -93,10 +102,10 @@ function closeByEsc(evt) {
 }
 
 
-function deleteElement(event) {
-  const element = event.target.closest('.element');
-  element.remove();
-}
+// function deleteElement(event) {
+//   const element = event.target.closest('.element');
+//   element.remove();
+// }
 
 function makeSubmitHandler(evt) {
   evt.preventDefault();
