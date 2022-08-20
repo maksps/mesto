@@ -28,24 +28,6 @@ function setInputEditFormValue() {
 }
 
 
-
-// function createElement(name, link) {
-//   const card = template.cloneNode(true);
-//   const elementImage = card.querySelector('.element__image');
-//   elementImage.src = link;
-//   elementImage.alt = name;
-//   card.querySelector('.element__text').textContent = name;
-//   card.querySelector('.element__btn-delete').addEventListener('click', deleteElement);
-//   card.querySelector('.element__like').addEventListener('click', addRemoveLike);
-//   elementImage.addEventListener('click', function () {
-//     popupImage.src = link;
-//     popupImage.alt = name;
-//     popupFigcaption.textContent = name;
-//     openPopup(popupPlace);
-//   });
-//   return card;
-// }
-
 function createInitialElements() {
   
   const initialCards = [
@@ -77,7 +59,7 @@ function createInitialElements() {
   ];
   
   initialCards.forEach(function (item) {
-    const card = new Card(item.name, item.link, template );
+    const card = new Card(item.name, item.link, template, openPopup, popupImage, popupFigcaption, popupPlace );
     cardsContainer.prepend(card.createCard());
   });
 }
@@ -102,11 +84,6 @@ function closeByEsc(evt) {
 }
 
 
-// function deleteElement(event) {
-//   const element = event.target.closest('.element');
-//   element.remove();
-// }
-
 function makeSubmitHandler(evt) {
   evt.preventDefault();
   profileJob.textContent = jobInput.value;
@@ -121,15 +98,12 @@ function resetFormElementAdd() {
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  cardsContainer.prepend(createElement(placeNameInput.value, linkInput.value));
+  const card = new Card(placeNameInput.value, linkInput.value, template, openPopup, popupImage, popupFigcaption, popupPlace);
+  cardsContainer.prepend(card.createCard());
+  
   closePopup(popupAdd);
   resetFormElementAdd();
 }
-
-// function addRemoveLike(event) {
-//   const elementLike = event.target.closest('.element__like');
-//   elementLike.classList.toggle('element__like_checked');
-// }
 
 setInputEditFormValue();
 createInitialElements();
