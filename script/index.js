@@ -126,10 +126,10 @@ function makeSubmitCreateElement(evt) {
   resetFormElementAdd();
 }
 
-function addRemoveLike(event) {
-  const elementLike = event.target.closest('.element__like');
-  elementLike.classList.toggle('element__like_checked');
-}
+// function addRemoveLike(event) {
+//   const elementLike = event.target.closest('.element__like');
+//   elementLike.classList.toggle('element__like_checked');
+// }
 
 setInputEditFormValue();
 createInitialElements();
