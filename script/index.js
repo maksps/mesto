@@ -1,4 +1,5 @@
 import {Card} from './Сard.js';
+import {FormValidator} from './FormValidator.js';
 
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
