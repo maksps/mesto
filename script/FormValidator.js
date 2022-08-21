@@ -71,16 +71,4 @@ export class FormValidator {
 }
 
 
-// const formSelectors = {
-//     formSelector: '.popup__form',
-//     inputSelector: '.input__text',
-//     submitButtonSelector: '.popup__btn-save',
-//     inactiveButtonClass: 'popup__btn-save_inactive',
-//     inputErrorClass: 'input__text_type_error',
-//     errorClass: 'popup__input-error_active'
-// }
-
-
-// const valid = new FormValidator(formSelectors);
-// valid.enableValidation();
 

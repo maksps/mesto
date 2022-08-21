@@ -23,14 +23,9 @@ export class Card {
     }
 
     _setListeners = (_card) => {
-        _card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
-        _card.querySelector('.element__like').addEventListener('click', this._addRemoveLike);
+        // _card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
+        // _card.querySelector('.element__like').addEventListener('click', this._addRemoveLike);
         _card.addEventListener('click', this._cardClickHandler);
-            //     popupImage.src = link;
-            //     popupImage.alt = name;
-            //     popupFigcaption.textContent = name;
-            //     openPopup(popupPlace);
-            //   });
     }
 
     _delClickHandler = (evt) => {
