@@ -23,9 +23,9 @@ export class Card {
     }
 
     _setListeners = (_card) => {
-        // _card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
-        // _card.querySelector('.element__like').addEventListener('click', this._addRemoveLike);
-        _card.addEventListener('click', this._cardClickHandler);
+        _card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
+        _card.querySelector('.element__like').addEventListener('click', this._addRemoveLike);
+        _card.querySelector('.element__image').addEventListener('click', this._cardClickHandler);
     }
 
     _delClickHandler = (evt) => {

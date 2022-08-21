@@ -49,7 +49,6 @@ export class FormValidator {
         });
     };
 
-
     _hasInvalidInput = (inputList) => {
         return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
@@ -65,9 +64,7 @@ export class FormValidator {
             buttonElement.classList.remove(this._inactiveButtonClass);
             buttonElement.removeAttribute('disabled');
         }
-    }
-
-  
+    }  
 }
 
 
