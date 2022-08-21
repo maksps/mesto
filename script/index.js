@@ -22,6 +22,15 @@ const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 const template = document.querySelector('.element-template').content.querySelector('.element');
 
+const formSelectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.input__text',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'popup__btn-save_inactive',
+  inputErrorClass: 'input__text_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
 
 function setInputEditFormValue() {
   nameInput.value = profileName.textContent;
@@ -126,5 +135,8 @@ buttonEdit.addEventListener('click', function () {
 
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
+
+const valid = new FormValidator(formSelectors);
+valid.enableValidation();
 
 
