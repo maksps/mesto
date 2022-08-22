@@ -22,6 +22,9 @@ const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 const template = document.querySelector('.element-template').content.querySelector('.element');
 
+
+
+
 const formSelectors = {
   formSelector: '.popup__form',
   inputSelector: '.input__text',
@@ -31,6 +34,33 @@ const formSelectors = {
   errorClass: 'popup__input-error_active'
 }
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+
+];
 
 function setInputEditFormValue() {
   nameInput.value = profileName.textContent;
@@ -40,33 +70,7 @@ function setInputEditFormValue() {
 
 function createInitialElements() {
   
-  const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
 
-  ];
   
   initialCards.forEach(function (item) {
     const card = new Card(item.name, item.link, template, openPopup, popupImage, popupFigcaption, popupPlace );
@@ -136,7 +140,10 @@ buttonEdit.addEventListener('click', function () {
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
 
-const valid = new FormValidator(formSelectors);
-valid.enableValidation();
+const profileValidation = new FormValidator(formSelectors, formElementEdit);
+const newCardValidation = new FormValidator(formSelectors, formElementAdd);
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
+
 
 
