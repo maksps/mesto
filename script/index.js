@@ -1,5 +1,5 @@
-import {Card} from './Сard.js';
-import {FormValidator} from './FormValidator.js';
+import { Card } from './Сard.js';
+import { FormValidator } from './FormValidator.js';
 
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
@@ -69,14 +69,14 @@ function setInputEditFormValue() {
   jobInput.value = profileJob.textContent;
 }
 
+function createCard(name, link) {
+  const card = new Card(name, link, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace);
+  return card.createCard();
+}
 
 function createInitialElements() {
-  
-
-  
   initialCards.forEach(function (item) {
-    const card = new Card(item.name, item.link, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace );
-    cardsContainer.prepend(card.createCard());
+    cardsContainer.prepend(createCard(item.name, item.link));
   });
 }
 
@@ -114,14 +114,14 @@ function resetFormElementAdd() {
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  const card = new Card(placeNameInput.value, linkInput.value, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace);
+  createCard(placeNameInput.value, linkInput.value);
   cardsContainer.prepend(card.createCard());
-  
+
   closePopup(popupAdd);
   resetFormElementAdd();
 }
 
-setInputEditFormValue();
+// setInputEditFormValue();
 createInitialElements();
 formElementEdit.addEventListener('submit', makeSubmitHandler);
 formElementAdd.addEventListener('submit', makeSubmitCreateElement);
@@ -137,6 +137,8 @@ popups.forEach(function (popup) {
 
 buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit);
+  setInputEditFormValue();
+  profileValidation.enableValidation();
 });
 
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
@@ -144,7 +146,7 @@ buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
-profileValidation.enableValidation();
+// profileValidation.enableValidation();
 newCardValidation.enableValidation();
 
 
