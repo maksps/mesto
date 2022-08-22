@@ -70,7 +70,7 @@ function setInputEditFormValue() {
 }
 
 function createCard(name, link) {
-  const card = new Card(name, link, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace);
+  const card = new Card(name, link, templateSelector, cardClickHandler);
   return card.createCard();
 }
 
@@ -121,7 +121,6 @@ function makeSubmitCreateElement(evt) {
   resetFormElementAdd();
 }
 
-// setInputEditFormValue();
 createInitialElements();
 formElementEdit.addEventListener('submit', makeSubmitHandler);
 formElementAdd.addEventListener('submit', makeSubmitCreateElement);
@@ -144,9 +143,15 @@ buttonEdit.addEventListener('click', function () {
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 
 
+function cardClickHandler (link, name) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupFigcaption.textContent = name;
+  openPopup(popupPlace);
+}
+
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
-// profileValidation.enableValidation();
 newCardValidation.enableValidation();
 
 
