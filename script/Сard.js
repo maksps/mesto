@@ -14,31 +14,34 @@ export class Card {
 
     createCard = () => {
         this._card = this._template.cloneNode(true);
-        const elementImage = this._card.querySelector('.element__image');
-        elementImage.src = this._link;
-        elementImage.alt = this._name;
+        this._elementImage = this._card.querySelector('.element__image');
+        this._elementImage.src = this._link;
+        this._elementImage.alt = this._name;
         this._card.querySelector('.element__text').textContent = this._name;
-        this._setListeners(this._card);
+        this._setListeners();
 
         return this._card
     }
 
-    _setListeners = (_card) => {
-        _card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
-        _card.querySelector('.element__like').addEventListener('click', this._addRemoveLike);
-        _card.querySelector('.element__image').addEventListener('click', this._cardClickHandler);
+    
+
+    _setListeners = () => {
+        this._buttonLike = this._card.querySelector('.element__like');
+        this._card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
+        this._buttonLike.addEventListener('click', this._addRemoveLike);
+        this._elementImage.addEventListener('click', this._cardClickHandler);
     }
 
-    _delClickHandler = (evt) => {
-        const element = evt.target.closest('.element');
-        element.remove();
+    _delClickHandler = () => {
+        this._card.remove();
+        this._card = null;
     }
     
-    _addRemoveLike = (evt) => {
-        const elementLike = evt.target.closest('.element__like');
-        elementLike.classList.toggle('element__like_checked');
+    _addRemoveLike = () => {
+        this._buttonLike.classList.toggle('element__like_checked');
     }
-    _cardClickHandler =(evt) => {
+    
+    _cardClickHandler =() => {
         this._popupImage.src = this._link;
         this._popupImage.alt = this._name;
         this._popupFigcaption.textContent = this._name;
