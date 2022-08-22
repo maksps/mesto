@@ -9,10 +9,11 @@ export class Card {
         this._popupImage = popupImage;
         this._popupFigcaption = popupFigcaption;
         this._popupPlace = popupPlace;
+        this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
     }
 
     createCard = () => {
-        this._card = this._templateSelector.cloneNode(true);
+        this._card = this._template.cloneNode(true);
         const elementImage = this._card.querySelector('.element__image');
         elementImage.src = this._link;
         elementImage.alt = this._name;

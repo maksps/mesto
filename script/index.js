@@ -20,7 +20,8 @@ const popupImage = popupPlace.querySelector('.popup__image');
 const popupFigcaption = popupPlace.querySelector('.popup__figcaption');
 const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
-const template = document.querySelector('.element-template').content.querySelector('.element');
+
+const templateSelector = '.element-template';
 
 
 
@@ -74,7 +75,7 @@ function createInitialElements() {
 
   
   initialCards.forEach(function (item) {
-    const card = new Card(item.name, item.link, template, openPopup, popupImage, popupFigcaption, popupPlace );
+    const card = new Card(item.name, item.link, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace );
     cardsContainer.prepend(card.createCard());
   });
 }
@@ -113,7 +114,7 @@ function resetFormElementAdd() {
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  const card = new Card(placeNameInput.value, linkInput.value, template, openPopup, popupImage, popupFigcaption, popupPlace);
+  const card = new Card(placeNameInput.value, linkInput.value, templateSelector, openPopup, popupImage, popupFigcaption, popupPlace);
   cardsContainer.prepend(card.createCard());
   
   closePopup(popupAdd);
