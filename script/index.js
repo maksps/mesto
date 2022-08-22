@@ -106,17 +106,16 @@ function makeSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   closePopup(popupEdit);
 }
+
 function resetFormElementAdd() {
   formElementAdd.reset();
-  buttonSaveAdd.classList.add('popup__btn-save_inactive');
-  buttonSaveAdd.setAttribute('disabled', true);
+  // buttonSaveAdd.classList.add('popup__btn-save_inactive');
+  // buttonSaveAdd.setAttribute('disabled', true);
 }
 
 function makeSubmitCreateElement(evt) {
   evt.preventDefault();
-  createCard(placeNameInput.value, linkInput.value);
-  cardsContainer.prepend(card.createCard());
-
+  cardsContainer.prepend(createCard(placeNameInput.value, linkInput.value));
   closePopup(popupAdd);
   resetFormElementAdd();
 }
@@ -140,7 +139,9 @@ buttonEdit.addEventListener('click', function () {
   profileValidation.enableValidation();
 });
 
-buttonAdd.addEventListener('click', () => openPopup(popupAdd));
+buttonAdd.addEventListener('click', function(){
+   openPopup(popupAdd);
+    newCardValidation.enableValidation()});
 
 
 function cardClickHandler (link, name) {
@@ -152,7 +153,6 @@ function cardClickHandler (link, name) {
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
-newCardValidation.enableValidation();
 
 
 

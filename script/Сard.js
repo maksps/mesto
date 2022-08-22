@@ -20,7 +20,6 @@ export class Card {
     }
 
     
-
     _setListeners = () => {
         this._buttonLike = this._card.querySelector('.element__like');
         this._card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
