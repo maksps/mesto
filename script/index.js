@@ -25,6 +25,7 @@ const template = document.querySelector('.element-template').content.querySelect
 
 
 
+
 const formSelectors = {
   formSelector: '.popup__form',
   inputSelector: '.input__text',
