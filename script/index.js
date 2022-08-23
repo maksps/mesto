@@ -136,15 +136,16 @@ popups.forEach(function (popup) {
 buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit);
   setInputEditFormValue();
-  profileValidation.enableValidation();
+  profileValidation.resetValidation();
 });
 
-buttonAdd.addEventListener('click', function(){
-   openPopup(popupAdd);
-    newCardValidation.enableValidation()});
+buttonAdd.addEventListener('click', function () {
+  openPopup(popupAdd);
+  newCardValidation.resetValidation();
+});
 
 
-function cardClickHandler (link, name) {
+function cardClickHandler(link, name) {
   popupImage.src = link;
   popupImage.alt = name;
   popupFigcaption.textContent = name;
@@ -153,6 +154,8 @@ function cardClickHandler (link, name) {
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
 
 
 

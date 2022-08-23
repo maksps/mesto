@@ -44,7 +44,7 @@ export class FormValidator {
     };
 
     enableValidation = () => {
-        this._setEventListeners(this._formElement);
+        this._setEventListeners();
     };
 
     _hasInvalidInput = () => {
@@ -61,9 +61,17 @@ export class FormValidator {
         else {
             this._buttonElement.classList.remove(this._inactiveButtonClass);
             this._buttonElement.removeAttribute('disabled');
-        }
+       }
     }
+
+    resetValidation() {
+        this._toggleButtonState(); 
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement) 
+        });
+      }
 }
+
 
 
 
