@@ -1,5 +1,11 @@
 import { Card } from './Сard.js';
 import { FormValidator } from './FormValidator.js';
+import { Section } from './Section.js';
+// import { Popup } from './Popup.js';
+// import { PopupWithImage } from './PopupWithImage.js'
+// import { PopupWithForm } from './PopupWithForm.js';
+// import { UserInfo } from './UserInfo';
+
 
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
@@ -13,7 +19,7 @@ const placeNameInput = popupAdd.querySelector('.input__text_type_placename');
 const linkInput = popupAdd.querySelector('.input__text_type_link');
 const formElementEdit = popupEdit.querySelector('.popup__form');
 const formElementAdd = popupAdd.querySelector('.popup__form');
-const cardsContainer = document.querySelector('.elements');
+// const cardsContainer = document.querySelector('.elements');
 const popupPlace = document.querySelector('.popup_place');
 const popups = document.querySelectorAll('.popup');
 const popupImage = popupPlace.querySelector('.popup__image');
@@ -22,6 +28,7 @@ const buttonSaveEdit = popupEdit.querySelector('.popup__btn-save');
 const buttonSaveAdd = popupAdd.querySelector('.popup__btn-save');
 
 const templateSelector = '.element-template';
+const cardsContainerSelector = '.elements';
 
 
 
@@ -74,11 +81,11 @@ function createCard(name, link) {
   return card.createCard();
 }
 
-function createInitialElements() {
-  initialCards.forEach(function (item) {
-    cardsContainer.prepend(createCard(item.name, item.link));
-  });
-}
+// function createInitialElements() {
+//   initialCards.forEach(function (item) {
+//     cardsContainer.prepend(createCard(item.name, item.link));
+//   });
+// }
 
 
 function openPopup(popup) {
@@ -120,7 +127,7 @@ function makeSubmitCreateElement(evt) {
   resetFormElementAdd();
 }
 
-createInitialElements();
+// createInitialElements();
 formElementEdit.addEventListener('submit', makeSubmitHandler);
 formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 
@@ -156,6 +163,18 @@ const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
+
+const defaultCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item.name, item.link, templateSelector, cardClickHandler);
+    const cardElement = card.createCard();
+    defaultCardList.addItem(cardElement);
+    
+  }
+}, cardsContainerSelector);
+
+defaultCardList.render();
 
 
 
