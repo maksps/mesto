@@ -1,11 +1,11 @@
 
 export class Card {
 
-    constructor(name, link, templateSelector, cardClickHandler) {
+    constructor(name, link, templateSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
-        this._cardClickHandler = cardClickHandler;
+        this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
     }
 
@@ -23,7 +23,7 @@ export class Card {
         this._buttonLike = this._card.querySelector('.element__like');
         this._card.querySelector('.element__btn-delete').addEventListener('click', this._delClickHandler);
         this._buttonLike.addEventListener('click', this._addRemoveLike);
-        this._elementImage.addEventListener('click', () => {this._cardClickHandler(this._link, this._name)} );
+        this._elementImage.addEventListener('click', () => {this._handleCardClick(this._link, this._name)} );
     }
 
     _delClickHandler = () => {

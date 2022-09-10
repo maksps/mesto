@@ -120,7 +120,7 @@ buttonAdd.addEventListener('click', function () {
 });
 
 
-function cardClickHandler(link, name) {
+function handleCardClick(link, name) {
   popupImage.src = link;
   popupImage.alt = name;
   popupFigcaption.textContent = name;
@@ -135,7 +135,7 @@ newCardValidation.enableValidation();
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, templateSelector, cardClickHandler);
+    const card = new Card(item.name, item.link, templateSelector, handleCardClick);
     const cardElement = card.createCard();
     defaultCardList.addItem(cardElement);
     
