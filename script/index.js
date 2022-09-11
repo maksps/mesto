@@ -2,6 +2,7 @@ import { Card } from './Сard.js';
 import { FormValidator } from './FormValidator.js';
 import { Section } from './Section.js';
 import { Popup } from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 // import { PopupWithImage } from './PopupWithImage.js'
 // import { PopupWithForm } from './PopupWithForm.js';
 // import { UserInfo } from './UserInfo';
@@ -10,8 +11,8 @@ const popupAdd = new Popup('.popup_add');
 popupAdd.setEventListeners();
 const popupEdit = new Popup('.popup_edit');
 popupEdit.setEventListeners();
-const popupPlace = new Popup('.popup_place');
-popupPlace.setEventListeners();
+// const popupPlace = new PopupWithImage('.popup_place');
+// popupPlace.setEventListeners();
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
@@ -121,9 +122,8 @@ buttonAdd.addEventListener('click', function () {
 
 
 function handleCardClick(link, name) {
-  popupImage.src = link;
-  popupImage.alt = name;
-  popupFigcaption.textContent = name;
+  const popupPlace = new PopupWithImage(link, name, '.popup_place');
+  popupPlace.setEventListeners();
   popupPlace.open();
 }
 
@@ -141,6 +141,8 @@ const defaultCardList = new Section({
     
   }
 }, cardsContainerSelector);
+
+
 
 defaultCardList.render();
 
