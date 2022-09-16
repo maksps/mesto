@@ -2,17 +2,49 @@ import { Card } from './Сard.js';
 import { FormValidator } from './FormValidator.js';
 import { Section } from './Section.js';
 import { Popup } from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-// import { PopupWithImage } from './PopupWithImage.js'
-// import { PopupWithForm } from './PopupWithForm.js';
-// import { UserInfo } from './UserInfo';
+import PopupWithImage from './PopupWithImage.js'
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
-const popupAdd = new Popup('.popup_add');
-popupAdd.setEventListeners();
-const popupEdit = new Popup('.popup_edit');
+// const popupAdd = new Popup('.popup_add');
+// popupAdd.setEventListeners();
+// // const popupEdit = new Popup('.popup_edit');
+// // popupEdit.setEventListeners();
+
+
+const popupEdit = new PopupWithForm({
+  popupSelector: '.popup_edit',
+  handleSubmitForm: (data) => {
+    const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
+    userInfo.setUserInfo(data);
+  }
+});
 popupEdit.setEventListeners();
-// const popupPlace = new PopupWithImage('.popup_place');
-// popupPlace.setEventListeners();
+
+const popupAdd = new PopupWithForm({
+  popupSelector: '.popup_add',
+  handleSubmitForm: (data) => {
+    const newCard = new Section({
+      items: data,
+      renderer: (item) => {
+        const card = new Card(item.name, item.link, templateSelector, handleCardClick);
+        const cardElement = card.createCard();
+        defaultCardList.addItem(cardElement);
+
+      }
+
+    }, cardsContainerSelector);
+    newCard.render();
+  }
+});
+popupAdd.setEventListeners();
+
+
+
+
+
+
+
 
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
@@ -77,41 +109,44 @@ const initialCards = [
 ];
 
 function setInputEditFormValue() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
+  const userInfoContent = userInfo.getUserInfo();
+  nameInput.value = userInfoContent.name;
+  jobInput.value = userInfoContent.job;
 }
 
-function createCard(name, link) {
-  const card = new Card(name, link, templateSelector, cardClickHandler);
-  return card.createCard();
-}
+// function createCard(name, link) {
+//   const card = new Card(name, link, templateSelector, cardClickHandler);
+//   return card.createCard();
+// }
 
-function makeSubmitHandler(evt) {
-  evt.preventDefault();
-  profileJob.textContent = jobInput.value;
-  profileName.textContent = nameInput.value;
-  popupEdit.close();
-}
+// function makeSubmitHandler(evt) {
+//   evt.preventDefault();
+//   profileJob.textContent = jobInput.value;
+//   profileName.textContent = nameInput.value;
+//   popupEdit.close();
+// }
 
-function resetFormElementAdd() {
-  formElementAdd.reset();
-}
+// function resetFormElementAdd() {
+//   formElementAdd.reset();
+// }
 
-function makeSubmitCreateElement(evt) {
-  evt.preventDefault();
-  cardsContainer.prepend(createCard(placeNameInput.value, linkInput.value));
-  popupAdd.close();
-  resetFormElementAdd();
-}
+// function makeSubmitCreateElement(evt) {
+//   evt.preventDefault();
+//   cardsContainer.prepend(createCard(placeNameInput.value, linkInput.value));
+//   popupAdd.close();
+//   resetFormElementAdd();
+// }
 
 
-formElementEdit.addEventListener('submit', makeSubmitHandler);
-formElementAdd.addEventListener('submit', makeSubmitCreateElement);
+// formElementEdit.addEventListener('submit', makeSubmitHandler);
+// formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 
 buttonEdit.addEventListener('click', function () {
+
+  setInputEditFormValue();
   
   popupEdit.open();
-  setInputEditFormValue();
   profileValidation.resetValidation();
 });
 
@@ -138,13 +173,13 @@ const defaultCardList = new Section({
     const card = new Card(item.name, item.link, templateSelector, handleCardClick);
     const cardElement = card.createCard();
     defaultCardList.addItem(cardElement);
-    
   }
 }, cardsContainerSelector);
 
 
 
 defaultCardList.render();
+
 
 
 
