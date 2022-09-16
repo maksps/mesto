@@ -6,70 +6,14 @@ import PopupWithImage from './PopupWithImage.js'
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 
-// const popupAdd = new Popup('.popup_add');
-// popupAdd.setEventListeners();
-// // const popupEdit = new Popup('.popup_edit');
-// // popupEdit.setEventListeners();
-
-
-const popupEdit = new PopupWithForm({
-  popupSelector: '.popup_edit',
-  handleSubmitForm: (data) => {
-    const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
-    userInfo.setUserInfo(data);
-  }
-});
-popupEdit.setEventListeners();
-
-const popupAdd = new PopupWithForm({
-  popupSelector: '.popup_add',
-  handleSubmitForm: (data) => {
-    const newCard = new Section({
-      items: data,
-      renderer: (item) => {
-        const card = new Card(item.name, item.link, templateSelector, handleCardClick);
-        const cardElement = card.createCard();
-        defaultCardList.addItem(cardElement);
-
-      }
-
-    }, cardsContainerSelector);
-    newCard.render();
-  }
-});
-popupAdd.setEventListeners();
-
-
-
-
-
-
-
-
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
 const nameInput = document.querySelector('.input__text_type_name');
 const jobInput = document.querySelector('.input__text_type_job');
-const placeNameInput = document.querySelector('.input__text_type_placename');
-const linkInput = document.querySelector('.input__text_type_link');
 const formElementEdit = document.forms.profileEdit;
 const formElementAdd = document.forms.placeAdd;
-const cardsContainer = document.querySelector('.elements');
-// const popupPlace = document.querySelector('.popup_place');
-// const popups = document.querySelectorAll('.popup');
-const popupImage = document.querySelector('.popup__image');
-const popupFigcaption = document.querySelector('.popup__figcaption');
-const buttonSaveEdit = formElementEdit.querySelector('.popup__btn-save');
-const buttonSaveAdd = formElementAdd.querySelector('.popup__btn-save');
-
 const templateSelector = '.element-template';
 const cardsContainerSelector = '.elements';
-
-
-
-
 
 const formSelectors = {
   formSelector: '.popup__form',
@@ -115,37 +59,9 @@ function setInputEditFormValue() {
   jobInput.value = userInfoContent.job;
 }
 
-// function createCard(name, link) {
-//   const card = new Card(name, link, templateSelector, cardClickHandler);
-//   return card.createCard();
-// }
-
-// function makeSubmitHandler(evt) {
-//   evt.preventDefault();
-//   profileJob.textContent = jobInput.value;
-//   profileName.textContent = nameInput.value;
-//   popupEdit.close();
-// }
-
-// function resetFormElementAdd() {
-//   formElementAdd.reset();
-// }
-
-// function makeSubmitCreateElement(evt) {
-//   evt.preventDefault();
-//   cardsContainer.prepend(createCard(placeNameInput.value, linkInput.value));
-//   popupAdd.close();
-//   resetFormElementAdd();
-// }
-
-
-// formElementEdit.addEventListener('submit', makeSubmitHandler);
-// formElementAdd.addEventListener('submit', makeSubmitCreateElement);
 
 buttonEdit.addEventListener('click', function () {
-
   setInputEditFormValue();
-  
   popupEdit.open();
   profileValidation.resetValidation();
 });
@@ -175,11 +91,24 @@ const defaultCardList = new Section({
     defaultCardList.addItem(cardElement);
   }
 }, cardsContainerSelector);
-
-
-
 defaultCardList.render();
 
 
+const popupAdd = new PopupWithForm({
+  popupSelector: '.popup_add',
+  handleSubmitForm: (data) => {
+    const card = new Card(data.placeNameInput, data.linkInput, templateSelector, handleCardClick);
+    const cardElement = card.createCard();
+    defaultCardList.addItem(cardElement);
+  }
+});
+popupAdd.setEventListeners();
 
-
+const popupEdit = new PopupWithForm({
+  popupSelector: '.popup_edit',
+  handleSubmitForm: (data) => {
+    const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
+    userInfo.setUserInfo(data);
+  }
+});
+popupEdit.setEventListeners();

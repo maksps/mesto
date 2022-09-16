@@ -12,6 +12,5 @@ export default class UserInfo {
     setUserInfo = (inputInfo) => {
         this._profileName.textContent = inputInfo.nameInput;
         this._profileJob.textContent = inputInfo.jobInput;
-        console.log(inputInfo);
     }
 }
