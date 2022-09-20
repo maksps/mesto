@@ -1,8 +1,7 @@
-import '../pages/index.css';
+import './index.css';
 import { Card } from '../components/Сard.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -17,7 +16,6 @@ const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJo
 
 
 function setInputEditFormValue() {
-  const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
   const userInfoContent = userInfo.getUserInfo();
   nameInput.value = userInfoContent.name;
   jobInput.value = userInfoContent.job;
@@ -37,8 +35,6 @@ buttonAdd.addEventListener('click', function () {
 
 
 function handleCardClick(link, name) {
-  // const popupWithImage = new PopupWithImage('.popup_place');
-  // popupWithImage.setEventListeners();
   popupWithImage.open(link, name);
 }
 
