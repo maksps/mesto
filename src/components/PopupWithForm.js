@@ -4,12 +4,13 @@ export default class PopupWithForm extends Popup {
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
         this._form = this._popup.querySelector('.popup__form');
+        this._inputList = Array.from (this._popup.querySelectorAll('.input__text'));
     }
 
     _getInputValues() {
-        this._inputForms = Array.from (this._popup.querySelectorAll('.input__text'));
+        
         const inputValues = {};
-        this._inputForms.forEach((inputForm) => (inputValues[inputForm.name] = inputForm.value));
+        this._inputList.forEach((input) => (inputValues[input.name] = input.value));
         return inputValues;
 
     }
@@ -30,6 +31,17 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
 
     }
+
+    
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      input.value = data[input.name];
+    });
+  }
+
+
+
 
 
 
