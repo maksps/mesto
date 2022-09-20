@@ -65,9 +65,8 @@ defaultCardList.render();
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_add',
   handleSubmitForm: (data) => {
-    const card = new Card(data.placeNameInput, data.linkInput, templateSelector, handleCardClick);
-    const cardElement = card.createCard();
-    defaultCardList.addItem(cardElement);
+    const card = createCard(data)
+    defaultCardList.addItem(card);
   }
 });
 popupAdd.setEventListeners();
