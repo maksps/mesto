@@ -47,11 +47,19 @@ const newCardValidation = new FormValidator(formSelectors, formElementAdd);
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 
+
+
+function createCard(item) {
+  const card = new Card(item.name, item.link, templateSelector, handleCardClick);
+  const cardElement = card.createCard();
+return cardElement
+}
+
+
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, templateSelector, handleCardClick);
-    const cardElement = card.createCard();
+    const cardElement = createCard(item)
     defaultCardList.addItem(cardElement);
   }
 }, cardsContainerSelector);
