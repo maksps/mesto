@@ -1,4 +1,4 @@
-import '../pages/index.css' ;
+import '../pages/index.css';
 import { Card } from '../components/Сard.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -7,8 +7,14 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
-import {buttonEdit, buttonAdd, nameInput, jobInput, formElementEdit,
-   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards} from '../utils/constants.js';
+import {
+  buttonEdit, buttonAdd, nameInput, jobInput, formElementEdit,
+  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards
+} from '../utils/constants.js';
+
+
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
+
 
 function setInputEditFormValue() {
   const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
@@ -31,9 +37,9 @@ buttonAdd.addEventListener('click', function () {
 
 
 function handleCardClick(link, name) {
-  const popupPlace = new PopupWithImage('.popup_place');
-  popupPlace.setEventListeners();
-  popupPlace.open(link, name);
+  // const popupWithImage = new PopupWithImage('.popup_place');
+  // popupWithImage.setEventListeners();
+  popupWithImage.open(link, name);
 }
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
@@ -65,8 +71,11 @@ popupAdd.setEventListeners();
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleSubmitForm: (data) => {
-    const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
     userInfo.setUserInfo(data);
   }
 });
 popupEdit.setEventListeners();
+
+const popupWithImage = new PopupWithImage('.popup_place');
+popupWithImage.setEventListeners();
+
