@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: { main: './src/pages/index.js' },
@@ -14,11 +13,10 @@ module.exports = {
   },
   mode: 'development',
   devServer: {
-    static: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика
-    compress: true, // это ускорит загрузку в режиме разработки
-    port: 8080, // порт, чтобы открывать сайт по адресу localhost:8080, но можно поменять порт
-
-    open: true // сайт будет открываться сам при запуске npm run dev
+    static: path.resolve(__dirname, './dist'), 
+    compress: true, 
+    port: 8080, 
+    open: true 
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -26,14 +24,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/images'),
-          to: path.resolve(__dirname, 'dist/images')
-        }
-      ]
-    })
   ],
   module: {
     rules: [
