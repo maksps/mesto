@@ -74,9 +74,9 @@ buttonAdd.addEventListener('click', function () {
 
 
 function handleCardClick(link, name) {
-  const popupPlace = new PopupWithImage(link, name, '.popup_place');
+  const popupPlace = new PopupWithImage('.popup_place');
   popupPlace.setEventListeners();
-  popupPlace.open();
+  popupPlace.open(link, name);
 }
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
