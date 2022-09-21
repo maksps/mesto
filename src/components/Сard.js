@@ -12,6 +12,7 @@ export class Card {
     createCard = () => {
         this._card = this._template.cloneNode(true);
         this._buttonLike = this._card.querySelector('.element__like');
+        this._buttonDelete = this._card.querySelector('.element__btn-delete');
         this._elementImage = this._card.querySelector('.element__image');
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
@@ -21,7 +22,7 @@ export class Card {
     }
 
     _setListeners = () => {
-        this._card.querySelector('.element__btn-delete').addEventListener('click', this._handleDelete);
+        this._buttonDelete.addEventListener('click', this._handleDelete);
         this._buttonLike.addEventListener('click', this._toggleLike);
         this._elementImage.addEventListener('click', () => {this._handleCardClick(this._link, this._name)} );
     }
@@ -33,6 +34,12 @@ export class Card {
     
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
+        console.log(this._buttonDelete);
+        this.setButtonDelete();
+    }
+
+    setButtonDelete = () => {
+    this._buttonDelete.classList.add('element__btn-delete_seted');
     }
     
 }

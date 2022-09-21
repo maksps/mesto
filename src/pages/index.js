@@ -47,16 +47,16 @@ newCardValidation.enableValidation();
 
 function createCard(item) {
   const card = new Card(item.name, item.link, templateSelector, handleCardClick);
-  const cardElement = card.createCard();
-return cardElement
+  return card;
 }
 
 
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const cardElement = createCard(item)
-    defaultCardList.addItem(cardElement);
+    const card = createCard(item);
+    const cardMarkup = card.createCard();
+    defaultCardList.addItem(cardMarkup);
   }
 }, cardsContainerSelector);
 defaultCardList.render();
@@ -65,8 +65,10 @@ defaultCardList.render();
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_add',
   handleSubmitForm: (data) => {
-    const card = createCard(data)
-    defaultCardList.addItem(card);
+    const card = createCard(data);
+    const cardMarkup = card.createCard();
+    defaultCardList.addItem(cardMarkup);
+    card.setButtonDelete()
   }
 });
 popupAdd.setEventListeners();

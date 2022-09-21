@@ -14,7 +14,7 @@
   cursor: pointer;
   transition: opacity 0.2s linear;
   margin-top: 11px;
-}
+} 
 
 .popup__btn-save:hover {
   opacity: 0.8;
