@@ -7,6 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import {Popup} from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js'
 
 
 import {
@@ -54,15 +55,15 @@ function createCard(item) {
 }
 
 
-const defaultCardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = createCard(item);
-    const cardMarkup = card.createCard();
-    defaultCardList.addItem(cardMarkup);
-  }
-}, cardsContainerSelector);
-defaultCardList.render();
+// const defaultCardList = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const card = createCard(item);
+//     const cardMarkup = card.createCard();
+//     defaultCardList.addItem(cardMarkup);
+//   }
+// }, cardsContainerSelector);
+// defaultCardList.render();
 
 
 const popupAdd = new PopupWithForm({
@@ -89,3 +90,27 @@ popupWithImage.setEventListeners();
 
 const popupWithConfirm = new PopupWithConfirm ('.popup_confirm');
 popupWithConfirm.setEventListeners();
+
+const api = new Api(
+  {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-50/cards',
+    headers: {
+      authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
+      'content-type': 'application/json',
+    },
+  })
+
+ const cards =  api.getAllCards();
+ 
+ cards.then ((cards) => {
+  const defaultCardList = new Section({
+    items: cards,
+    renderer: (item) => {
+      const card = createCard(item);
+      const cardMarkup = card.createCard();
+      defaultCardList.addItem(cardMarkup);
+    }
+  }, cardsContainerSelector);
+  defaultCardList.render();
+  
+  } )
