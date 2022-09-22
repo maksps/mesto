@@ -4,7 +4,10 @@ import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
+import {Popup} from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
+
 
 import {
   buttonEdit, buttonAdd, nameInput, jobInput, formElementEdit,
@@ -68,7 +71,7 @@ const popupAdd = new PopupWithForm({
     const card = createCard(data);
     const cardMarkup = card.createCard();
     defaultCardList.addItem(cardMarkup);
-    card.setButtonDelete()
+    card.setButtonDelete(popupWithConfirm);
   }
 });
 popupAdd.setEventListeners();
@@ -84,3 +87,5 @@ popupEdit.setEventListeners();
 const popupWithImage = new PopupWithImage('.popup_place');
 popupWithImage.setEventListeners();
 
+const popupWithConfirm = new PopupWithConfirm ('.popup_confirm');
+popupWithConfirm.setEventListeners();

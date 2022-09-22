@@ -24,23 +24,25 @@ export class Card {
     _setListeners = () => {
         this._buttonDelete.addEventListener('click', this._handleDelete);
         this._buttonLike.addEventListener('click', this._toggleLike);
-        this._elementImage.addEventListener('click', () => {this._handleCardClick(this._link, this._name)} );
+        this._elementImage.addEventListener('click', () => { this._handleCardClick(this._link, this._name) });
     }
 
-     _handleDelete = () => {
-        this._card.remove();
-        this._card = null;
+    _handleDelete = () => {
+        this._popupWithConfirm.open();
+        // this._card.remove();
+        // this._card = null;  
     }
-    
+
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
         console.log(this._buttonDelete);
         this.setButtonDelete();
     }
 
-    setButtonDelete = () => {
-    this._buttonDelete.classList.add('element__btn-delete_seted');
+    setButtonDelete = (popupWithConfirm) => {
+        this._popupWithConfirm = popupWithConfirm;
+        this._buttonDelete.classList.add('element__btn-delete_seted');
     }
-    
+
 }
 
