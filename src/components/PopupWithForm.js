@@ -16,7 +16,6 @@ export default class PopupWithForm extends Popup {
     }
 
     setEventListeners() {
-
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -25,29 +24,15 @@ export default class PopupWithForm extends Popup {
         });
 
     }
-
     close() {
         super.close();
         this._form.reset();
         
     }
-
-
     // setInputValues(data) {
     //     this._inputList.forEach((input) => {
     //         // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
     //         input.value = data[input.name];
     //     });
     // }
-
-
-
-
-
-
-
-
-
-
-
 }

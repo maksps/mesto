@@ -1,15 +1,16 @@
 
 export class Card {
 
-    constructor(name, link, templateSelector, handleCardClick) {
+    constructor(name, link, templateSelector, handleCardClick, api) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
+        this._api = api;
     }
 
-    createCard = () => {
+    createCardMarkup = () => {
         this._card = this._template.cloneNode(true);
         this._buttonLike = this._card.querySelector('.element__like');
         this._buttonDelete = this._card.querySelector('.element__btn-delete');
@@ -43,6 +44,8 @@ export class Card {
         this._popupWithConfirm = popupWithConfirm;
         this._buttonDelete.classList.add('element__btn-delete_seted');
     }
+
+    
 
 }
 

@@ -21,13 +21,16 @@ export default class Api {
         return fetch(this._url, {
             method: "POST",
             headers: this._headers,
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
+            console.log(res);
+            // if (res.ok) {
+            //     
+            return res.json();
+            //     // console.log(res)
+            // }
 
-            return Promise.reject("Произошла ошибка");
+            // return Promise.reject("Произошла ошибка");
         });
 
     }

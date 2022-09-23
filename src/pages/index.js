@@ -5,7 +5,7 @@ import { Section } from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
-import {Popup} from '../components/Popup.js';
+import { Popup } from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 
@@ -32,10 +32,7 @@ buttonEdit.addEventListener('click', function () {
   profileValidation.resetValidation();
 });
 
-buttonAdd.addEventListener('click', function () {
-  popupAdd.open();
-  newCardValidation.resetValidation();
-});
+
 
 
 function handleCardClick(link, name) {
@@ -50,32 +47,10 @@ newCardValidation.enableValidation();
 
 
 function createCard(item) {
-  const card = new Card(item.name, item.link, templateSelector, handleCardClick);
+  const card = new Card(item.name, item.link, templateSelector, handleCardClick, api);
   return card;
 }
 
-
-// const defaultCardList = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = createCard(item);
-//     const cardMarkup = card.createCard();
-//     defaultCardList.addItem(cardMarkup);
-//   }
-// }, cardsContainerSelector);
-// defaultCardList.render();
-
-
-const popupAdd = new PopupWithForm({
-  popupSelector: '.popup_add',
-  handleSubmitForm: (data) => {
-    const card = createCard(data);
-    const cardMarkup = card.createCard();
-    defaultCardList.addItem(cardMarkup);
-    card.setButtonDelete(popupWithConfirm);
-  }
-});
-popupAdd.setEventListeners();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
@@ -88,7 +63,7 @@ popupEdit.setEventListeners();
 const popupWithImage = new PopupWithImage('.popup_place');
 popupWithImage.setEventListeners();
 
-const popupWithConfirm = new PopupWithConfirm ('.popup_confirm');
+const popupWithConfirm = new PopupWithConfirm('.popup_confirm');
 popupWithConfirm.setEventListeners();
 
 const api = new Api(
@@ -100,17 +75,50 @@ const api = new Api(
     },
   })
 
- const cards =  api.getAllCards();
- 
- cards.then ((cards) => {
+const cards = api.getAllCards();
+
+cards.then((cards) => {
   const defaultCardList = new Section({
     items: cards,
     renderer: (item) => {
       const card = createCard(item);
-      const cardMarkup = card.createCard();
+      const cardMarkup = card.createCardMarkup();
       defaultCardList.addItem(cardMarkup);
     }
   }, cardsContainerSelector);
   defaultCardList.render();
-  
-  } )
+
+
+  buttonAdd.addEventListener('click', function () {
+    popupAdd.open();
+    newCardValidation.resetValidation();
+  });
+
+  const popupAdd = new PopupWithForm({
+    popupSelector: '.popup_add',
+    handleSubmitForm: (data) => {
+
+      const newCard = api.addCard(data);
+      newCard.then((item) => {
+        const card = createCard(item);
+        const cardMarkup = card.createCardMarkup();
+        defaultCardList.addItem(cardMarkup);
+        card.setButtonDelete(popupWithConfirm);
+        
+      })
+      
+    }
+  });
+  popupAdd.setEventListeners();
+}).catch((err) => alert(err));
+
+// const newCard = api.addCard(data);
+
+// newCard.then({})
+
+// _saveItem = (text) => {
+//   this._api
+//     .addTask({ name: text })
+//     .then((data) => this._addItem(data.name))
+//     .catch((err) => console.log(err));
+// };
