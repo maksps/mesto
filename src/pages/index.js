@@ -48,7 +48,9 @@ newCardValidation.enableValidation();
 
 function createCard(item) {
   const card = new Card(item.name, item.link, templateSelector, handleCardClick, api);
-  return card;
+  const cardMarkup = card.createCardMarkup();
+  card.setButtonDelete(popupWithConfirm);
+  return cardMarkup;
 }
 
 
@@ -82,8 +84,7 @@ cards.then((cards) => {
     items: cards,
     renderer: (item) => {
       const card = createCard(item);
-      const cardMarkup = card.createCardMarkup();
-      defaultCardList.addItem(cardMarkup);
+      defaultCardList.addItem(card);
     }
   }, cardsContainerSelector);
   defaultCardList.render();
@@ -101,10 +102,7 @@ cards.then((cards) => {
       const newCard = api.addCard(data);
       newCard.then((item) => {
         const card = createCard(item);
-        const cardMarkup = card.createCardMarkup();
-        defaultCardList.addItem(cardMarkup);
-        card.setButtonDelete(popupWithConfirm);
-        
+        defaultCardList.addItem(card);
       })
       
     }
@@ -112,13 +110,3 @@ cards.then((cards) => {
   popupAdd.setEventListeners();
 }).catch((err) => alert(err));
 
-// const newCard = api.addCard(data);
-
-// newCard.then({})
-
-// _saveItem = (text) => {
-//   this._api
-//     .addTask({ name: text })
-//     .then((data) => this._addItem(data.name))
-//     .catch((err) => console.log(err));
-// };
