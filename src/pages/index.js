@@ -47,7 +47,7 @@ newCardValidation.enableValidation();
 
 
 function createCard(item) {
-  const card = new Card(item.name, item.link, templateSelector, handleCardClick, api);
+  const card = new Card(item, templateSelector, handleCardClick, api);
   const cardMarkup = card.createCardMarkup();
   card.setButtonDelete(popupWithConfirm, item);
   return cardMarkup;
@@ -109,10 +109,7 @@ cards.then((cards) => {
   });
   popupAdd.setEventListeners();
 
-// cards.forEach((card) => {
 
-//   console.log(card._id);
-// })
 
 }).catch((err) => alert(err));
 

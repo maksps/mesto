@@ -23,7 +23,6 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         }).then((res) => {
-            console.log(res);
             if (res.ok) {
                 return res.json();
             }
@@ -32,16 +31,14 @@ export default class Api {
         });
     }
     deleteCard(id) {
-        return fetch(`${this._url}${id}`, {
+        return fetch(`${this._url}${'/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
         }).then((res) => {
             if (res.ok) {
-                console.log(res);
-                // return res.json();
+                return res.json();
             }
-
-            return Promise.reject("Произошла ошибка");
+            return  Promise.reject("Произошла ошибка");
         });
     }
 
