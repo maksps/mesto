@@ -6,6 +6,12 @@ export default class PopupWithIConfirm extends Popup {
         
     }
 
- 
+    setEventListeners() {
+        super.setEventListeners();
+        this._form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._handleSubmitForm()
+            this.close()
+        });}
 
 }

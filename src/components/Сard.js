@@ -30,6 +30,7 @@ export class Card {
 
     _handleDelete = () => {
         this._popupWithConfirm.open();
+        this._popupWithConfirm.addEventListener()
         // this._card.remove();
         // this._card = null;  
     }
@@ -37,15 +38,16 @@ export class Card {
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
         console.log(this._buttonDelete);
-        this.setButtonDelete();
     }
 
-    setButtonDelete = (popupWithConfirm) => {
+    setButtonDelete = (popupWithConfirm, item) => {
+        if (item.owner._id === 'aeec8bcd4663f0fdd55a07a0'){
         this._popupWithConfirm = popupWithConfirm;
-        this._buttonDelete.classList.add('element__btn-delete_seted');
+        console.log(item.owner._id);
+        this._buttonDelete.classList.add('element__btn-delete_seted');}
     }
 
-    
+
 
 }
 
