@@ -30,10 +30,25 @@ export class Card {
 
     _handleDelete = () => {
         this._popupWithConfirm.open();
-        this._popupWithConfirm.addEventListener()
+        this._popupWithConfirm.setEventListeners(this._deleteServerPromise);
+        
         // this._card.remove();
         // this._card = null;  
+        
+
+
     }
+
+    _deleteServerPromise = () => {
+        console.log(this._api);
+        // this._api.deleteCard(this._id).then(() => {
+        //     // this._view.remove();
+        //     console.log("удалить")
+        // }).catch((err) => console.log(err));
+        // console.log(this._id);
+    }
+
+
 
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
@@ -41,10 +56,12 @@ export class Card {
     }
 
     setButtonDelete = (popupWithConfirm, item) => {
-        if (item.owner._id === 'aeec8bcd4663f0fdd55a07a0'){
-        this._popupWithConfirm = popupWithConfirm;
-        console.log(item.owner._id);
-        this._buttonDelete.classList.add('element__btn-delete_seted');}
+        if (item.owner._id === 'aeec8bcd4663f0fdd55a07a0') {
+            this._popupWithConfirm = popupWithConfirm;
+            console.log(item.owner._id);
+            this._buttonDelete.classList.add('element__btn-delete_seted');
+
+        }
     }
 
 

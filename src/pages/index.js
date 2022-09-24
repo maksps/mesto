@@ -108,7 +108,6 @@ cards.then((cards) => {
     }
   });
   popupAdd.setEventListeners();
-let userId = 1;
 
 // cards.forEach((card) => {
 
