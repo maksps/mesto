@@ -24,6 +24,7 @@ export class Card {
         this._card.querySelector('.element__text').textContent = this._name;
         this._setListeners();
         this._setCountLike();
+        this._setChekedLike();
         return this._card
     }
 
@@ -40,16 +41,29 @@ export class Card {
 
     _handleClickConfirm = () => {
 
-        this._api.deleteCard(this._id).then(() => {
-            this._card.remove();
-            this._card = null;
-        }).catch((err) => console.log(err));
+        this._api.deleteCard(this._id)
+            .then(() => {
+                this._card.remove();
+                this._card = null;
+            }).catch((err) => console.log(err));
     }
 
 
 
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
+        if (this._buttonLike.classList.contains('element__like_checked')) {
+            this._api.setLike(this._id)
+                .then((item) => {
+                    this._likeCount.textContent = item.likes.length;
+                }).catch((err) => console.log(err));
+        } else {
+            this._api.deleteLike(this._id)
+                .then((item) => {
+                    this._likeCount.textContent = item.likes.length;
+                }).catch((err) => console.log(err));
+        }
+
     }
 
     setButtonDelete = (popupWithConfirm, item) => {
@@ -58,8 +72,17 @@ export class Card {
             this._buttonDelete.classList.add('element__btn-delete_seted');
         }
     }
+
     _setCountLike = () => {
         this._likeCount.textContent = this._likes.length;
+    }
+
+    _setChekedLike = () => {
+        this._likes.forEach(element => {
+            if (element._id === this._userId) {
+                this._buttonLike.classList.add('element__like_checked');
+            }
+        });
     }
 
 }
