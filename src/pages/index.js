@@ -8,15 +8,25 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import { Popup } from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
-
-
 import {
   buttonEdit, buttonAdd, nameInput, jobInput, formElementEdit,
   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards
 } from '../utils/constants.js';
 
+const api = new Api(
+  {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-50/',
+    headers: {
+      authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
+      'content-type': 'application/json',
+    },
+  })
 
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' });
+
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' }, api);
+
+userInfo. getUserInfoFromApi();
+
 
 
 function setInputEditFormValue() {
@@ -68,22 +78,14 @@ popupWithImage.setEventListeners();
 const popupWithConfirm = new PopupWithConfirm('.popup_confirm');
 popupWithConfirm.setEventListeners();
 
-const api = new Api(
-  {
-    url: 'https://mesto.nomoreparties.co/v1/cohort-50/',
-    headers: {
-      authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
-      'content-type': 'application/json',
-    },
-  })
+
 
 const cards = api.getAllCards();
 
-// const userId = 
+
 
 const getUserInfo = api.getUserInfo();
 getUserInfo.then((info) => {
-  console.log(info);
   const userId = info._id;
 
   cards.then((cards) => {
