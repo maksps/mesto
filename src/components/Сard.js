@@ -1,7 +1,7 @@
 
 export class Card {
 
-    constructor(item, templateSelector, handleCardClick, api) {
+    constructor(item, templateSelector, handleCardClick, api, userId) {
         this._name = item.name;
         this._link = item.link;
         this._id = item._id;
@@ -9,6 +9,7 @@ export class Card {
         this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
         this._api = api;
+        this._userId = userId;
     }
 
     createCardMarkup = () => {
@@ -31,16 +32,12 @@ export class Card {
 
     _handleDelete = () => {
         this._popupWithConfirm.open();
-        this._popupWithConfirm.setEventListeners(this._deleteServerPromise);
-
-        // this._card.remove();
-        // this._card = null;  
+        this._popupWithConfirm.setEventListeners(this._handleClickConfirm);  
     }
 
-    _deleteServerPromise = () => {
-       
+    _handleClickConfirm = () => {
+
         this._api.deleteCard(this._id).then(() => {
-            // this._view.remove();
             this._card.remove();
             this._card = null;
         }).catch((err) => console.log(err));
@@ -50,19 +47,13 @@ export class Card {
 
     _toggleLike = () => {
         this._buttonLike.classList.toggle('element__like_checked');
-       
     }
 
     setButtonDelete = (popupWithConfirm, item) => {
-        if (item.owner._id === 'aeec8bcd4663f0fdd55a07a0') {
+        if (item.owner._id === this._userId) {
             this._popupWithConfirm = popupWithConfirm;
-           
             this._buttonDelete.classList.add('element__btn-delete_seted');
-
         }
     }
-
-
-
-}
+  }
 

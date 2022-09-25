@@ -5,20 +5,29 @@ export default class Api {
     }
 
     getAllCards() {
-        return fetch(this._url, {
+        return fetch(`${this._url}cards`, {
             headers: this._headers
         })
             .then((res) => {
                 if (res.ok) {
                     return res.json()
                 }
-                return Promise.reject("Произошла ошибка");
+                return Promise.reject(`Ошибка: ${res.status}`);
             });
     }
-
+    getUserInfo() {
+        return fetch(`${this._url}users/me`, {
+            headers: this._headers,
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
+    }
 
     addCard(data) {
-        return fetch(this._url, {
+        return fetch(`${this._url}cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify(data)
@@ -27,18 +36,18 @@ export default class Api {
                 return res.json();
             }
 
-            return Promise.reject("Произошла ошибка");
+            return Promise.reject(`Ошибка: ${res.status}`);
         });
     }
     deleteCard(id) {
-        return fetch(`${this._url}${'/'}${id}`, {
+        return fetch(`${this._url}${'cards/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
         }).then((res) => {
             if (res.ok) {
                 return res.json();
             }
-            return  Promise.reject("Произошла ошибка");
+            return Promise.reject(`Ошибка: ${res.status}`);
         });
     }
 

@@ -46,8 +46,8 @@ newCardValidation.enableValidation();
 
 
 
-function createCard(item) {
-  const card = new Card(item, templateSelector, handleCardClick, api);
+function createCard(item, userId) {
+  const card = new Card(item, templateSelector, handleCardClick, api, userId);
   const cardMarkup = card.createCardMarkup();
   card.setButtonDelete(popupWithConfirm, item);
   return cardMarkup;
@@ -70,7 +70,7 @@ popupWithConfirm.setEventListeners();
 
 const api = new Api(
   {
-    url: 'https://mesto.nomoreparties.co/v1/cohort-50/cards',
+    url: 'https://mesto.nomoreparties.co/v1/cohort-50/',
     headers: {
       authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
       'content-type': 'application/json',
@@ -79,37 +79,46 @@ const api = new Api(
 
 const cards = api.getAllCards();
 
-cards.then((cards) => {
-  const defaultCardList = new Section({
-    items: cards,
-    renderer: (item) => {
-      const card = createCard(item);
-      defaultCardList.addItem(card);
-    }
-  }, cardsContainerSelector);
-  defaultCardList.render();
+// const userId = 
 
+const getUserInfo = api.getUserInfo();
+getUserInfo.then((info) => {
+  console.log(info);
+  const userId = info._id;
 
-  buttonAdd.addEventListener('click', function () {
-    popupAdd.open();
-    newCardValidation.resetValidation();
-  });
-
-  const popupAdd = new PopupWithForm({
-    popupSelector: '.popup_add',
-    handleSubmitForm: (data) => {
-
-      const newCard = api.addCard(data);
-      newCard.then((item) => {
-        const card = createCard(item);
+  cards.then((cards) => {
+    const defaultCardList = new Section({
+      items: cards,
+      renderer: (item) => {
+        const card = createCard(item, userId);
         defaultCardList.addItem(card);
-      })
-      
-    }
-  });
-  popupAdd.setEventListeners();
+      }
+    }, cardsContainerSelector);
+    defaultCardList.render();
 
 
+    buttonAdd.addEventListener('click', function () {
+      popupAdd.open();
+      newCardValidation.resetValidation();
+    });
+
+    const popupAdd = new PopupWithForm({
+      popupSelector: '.popup_add',
+      handleSubmitForm: (data) => {
+
+        const newCard = api.addCard(data);
+        newCard.then((item) => {
+          const card = createCard(item, userId);
+          defaultCardList.addItem(card);
+        })
+
+      }
+    });
+    popupAdd.setEventListeners();
+
+
+
+  }).catch((err) => alert(err));
 
 }).catch((err) => alert(err));
 
