@@ -1,9 +1,11 @@
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
+export const buttonAvatar = document.querySelector('.profile__avatar-button');
 export const nameInput = document.querySelector('.input__text_type_name');
 export const jobInput = document.querySelector('.input__text_type_job');
 export const formElementEdit = document.forms.profileEdit;
 export const formElementAdd = document.forms.placeAdd;
+export const formAvatar = document.forms.avatarChange;
 export const templateSelector = '.element-template';
 export const cardsContainerSelector = '.elements';
 

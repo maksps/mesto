@@ -9,8 +9,8 @@ import { Popup } from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 import {
-  buttonEdit, buttonAdd, nameInput, jobInput, formElementEdit,
-  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards
+  buttonEdit, buttonAdd, buttonAvatar, nameInput, jobInput, formElementEdit,
+  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar
 } from '../utils/constants.js';
 
 const api = new Api(
@@ -24,10 +24,7 @@ const api = new Api(
 
 
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' }, api);
-
-userInfo. getUserInfoFromApi();
-
-
+userInfo.getUserInfoFromApi();
 
 function setInputEditFormValue() {
   const userInfoContent = userInfo.getUserInfo();
@@ -35,13 +32,16 @@ function setInputEditFormValue() {
   jobInput.value = userInfoContent.job;
 }
 
-
 buttonEdit.addEventListener('click', function () {
   setInputEditFormValue();
   popupEdit.open();
   profileValidation.resetValidation();
 });
 
+buttonAvatar.addEventListener('click', function () {
+  popupAvatarChange.open();
+  profileValidation.resetValidation();
+});
 
 
 
@@ -51,9 +51,10 @@ function handleCardClick(link, name) {
 
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
+const avatarValidation = new FormValidator(formSelectors, formAvatar);
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
-
+avatarValidation.enableValidation();
 
 
 function createCard(item, userId) {
@@ -80,6 +81,20 @@ popupWithConfirm.setEventListeners();
 
 
 
+const popupAvatarChange = new PopupWithForm({
+  popupSelector: '.popup_avatar',
+  handleSubmitForm: () => {
+    
+  }
+});
+popupAvatarChange.setEventListeners();
+
+
+
+
+
+
+
 const cards = api.getAllCards();
 
 
@@ -103,6 +118,8 @@ getUserInfo.then((info) => {
       popupAdd.open();
       newCardValidation.resetValidation();
     });
+
+
 
     const popupAdd = new PopupWithForm({
       popupSelector: '.popup_add',
