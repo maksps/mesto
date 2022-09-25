@@ -67,7 +67,7 @@ function createCard(item, userId) {
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleSubmitForm: (data) => {
-    userInfo.setUserInfo(data);
+    userInfo.updateUserInfo(data);
   }
 });
 popupEdit.setEventListeners();
