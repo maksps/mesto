@@ -4,6 +4,7 @@ export class Card {
     constructor(item, templateSelector, handleCardClick, api, userId) {
         this._name = item.name;
         this._link = item.link;
+        this._likes = item.likes;
         this._id = item._id;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
@@ -17,10 +18,12 @@ export class Card {
         this._buttonLike = this._card.querySelector('.element__like');
         this._buttonDelete = this._card.querySelector('.element__btn-delete');
         this._elementImage = this._card.querySelector('.element__image');
+        this._likeCount = this._card.querySelector('.element__like-count');
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
         this._card.querySelector('.element__text').textContent = this._name;
         this._setListeners();
+        this._setCountLike();
         return this._card
     }
 
@@ -32,7 +35,7 @@ export class Card {
 
     _handleDelete = () => {
         this._popupWithConfirm.open();
-        this._popupWithConfirm.setEventListeners(this._handleClickConfirm);  
+        this._popupWithConfirm.setEventListeners(this._handleClickConfirm);
     }
 
     _handleClickConfirm = () => {
@@ -55,5 +58,8 @@ export class Card {
             this._buttonDelete.classList.add('element__btn-delete_seted');
         }
     }
-  }
+    _setCountLike = () => {
+        this._likeCount.textContent = this._likes.length;
+    }
 
+}
