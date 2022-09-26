@@ -8,6 +8,7 @@ export const formElementAdd = document.forms.placeAdd;
 export const formAvatar = document.forms.avatarChange;
 export const templateSelector = '.element-template';
 export const cardsContainerSelector = '.elements';
+export const avatarInput = document.querySelector('.input__text_type_avatar')
 
 export const formSelectors = {
     formSelector: '.popup__form',

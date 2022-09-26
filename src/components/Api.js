@@ -15,7 +15,7 @@ export default class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             });
     }
-    getUserInfo() {
+    updateUserInfo() {
         return fetch(`${this._url}users/me`, {
             headers: this._headers,
         }).then((res) => {
@@ -87,7 +87,20 @@ export default class Api {
             return Promise.reject(`Ошибка: ${res.status}`);
         });
     }
-
+   
+    
+    changeAvatar(data) {
+        return fetch(`${this._url}users/me/avatar`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify(data)
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Ошибка: ${res.status}`);
+        });
+    }
 
 
 

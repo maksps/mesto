@@ -10,7 +10,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 import {
   buttonEdit, buttonAdd, buttonAvatar, nameInput, jobInput, formElementEdit,
-  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar
+  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput
 } from '../utils/constants.js';
 
 const api = new Api(
@@ -23,13 +23,14 @@ const api = new Api(
   })
 
 
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job' }, api);
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar-img'}, api);
 userInfo.getUserInfoFromApi();
 
 function setInputEditFormValue() {
   const userInfoContent = userInfo.getUserInfo();
   nameInput.value = userInfoContent.name;
   jobInput.value = userInfoContent.job;
+
 }
 
 buttonEdit.addEventListener('click', function () {
@@ -39,6 +40,8 @@ buttonEdit.addEventListener('click', function () {
 });
 
 buttonAvatar.addEventListener('click', function () {
+  const userAvatar = userInfo.getAvatar();
+  avatarInput.value = userAvatar;
   popupAvatarChange.open();
   profileValidation.resetValidation();
 });
@@ -68,7 +71,7 @@ function createCard(item, userId) {
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleSubmitForm: (data) => {
-    userInfo.updateUserInfo(data);
+    userInfo.changeUserInfo(data);
   }
 });
 popupEdit.setEventListeners();
@@ -80,29 +83,19 @@ const popupWithConfirm = new PopupWithConfirm('.popup_confirm');
 popupWithConfirm.setEventListeners();
 
 
-
 const popupAvatarChange = new PopupWithForm({
   popupSelector: '.popup_avatar',
-  handleSubmitForm: () => {
-    
+  handleSubmitForm: (data) => {
+    userInfo.changeAvatar(data);
   }
 });
 popupAvatarChange.setEventListeners();
 
-
-
-
-
-
-
-const cards = api.getAllCards();
-
-
-
-const getUserInfo = api.getUserInfo();
+const getUserInfo = api.updateUserInfo();
 getUserInfo.then((info) => {
   const userId = info._id;
 
+  const cards = api.getAllCards();
   cards.then((cards) => {
     const defaultCardList = new Section({
       items: cards,
