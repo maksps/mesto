@@ -10,7 +10,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 import {
   buttonEdit, buttonAdd, buttonAvatar, nameInput, jobInput, formElementEdit,
-  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput
+  formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput, saveButtons
 } from '../utils/constants.js';
 
 const api = new Api(
@@ -23,14 +23,13 @@ const api = new Api(
   })
 
 
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar-img'}, api);
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar-img' }, api);
 userInfo.getUserInfoFromApi();
 
 function setInputEditFormValue() {
   const userInfoContent = userInfo.getUserInfo();
   nameInput.value = userInfoContent.name;
   jobInput.value = userInfoContent.job;
-
 }
 
 buttonEdit.addEventListener('click', function () {
@@ -70,10 +69,21 @@ function createCard(item, userId) {
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
-  handleSubmitForm: (data) => {
-    userInfo.changeUserInfo(data);
+  handleSubmitForm: (data, button) => {
+    renderLoading(true, button, 'Сохранение...');
+    const updateUserData = api.editProfile({
+      name: data.nameInput,
+      about: data.jobInput
+    });
+    updateUserData.then((item) => {
+      userInfo.setUserInfo(item);
+    }).catch((err) => alert(err))
+      .finally(() => {
+        renderLoading(false, button, 'Сохранить');
+      });
   }
 });
+
 popupEdit.setEventListeners();
 
 const popupWithImage = new PopupWithImage('.popup_place');
@@ -85,10 +95,16 @@ popupWithConfirm.setEventListeners();
 
 const popupAvatarChange = new PopupWithForm({
   popupSelector: '.popup_avatar',
-  handleSubmitForm: (data) => {
-    userInfo.changeAvatar(data);
+  handleSubmitForm: (data, button) => {
+    renderLoading(true, button, 'сохранение...');
+    const updateUrl = api.changeAvatar(data);
+    updateUrl.then((item) => {
+      userInfo.setAvatar(item);
+    }).catch((err) => console.log(err))
+      .finally(() => { renderLoading(false, button, 'Сохранить'); });
   }
 });
+
 popupAvatarChange.setEventListeners();
 
 const getUserInfo = api.updateUserInfo();
@@ -119,10 +135,11 @@ getUserInfo.then((info) => {
       handleSubmitForm: (data) => {
 
         const newCard = api.addCard(data);
+        renderLoading(isLoading, button, loadingInfo);
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        })
+        }).catch((err) => alert(err));
 
       }
     });
@@ -131,8 +148,14 @@ getUserInfo.then((info) => {
 
 
   }).catch((err) => alert(err));
-
 }).catch((err) => alert(err));
 
-
+function renderLoading(isLoading, button, loadingInfo) {
+  if (isLoading) {
+    button.textContent = loadingInfo;
+  }
+  else if (!isLoading) {
+    button.textContent = loadingInfo;
+  }
+}
 

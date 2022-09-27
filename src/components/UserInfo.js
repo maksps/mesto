@@ -10,7 +10,7 @@ export default class UserInfo {
     getUserInfoFromApi = () => {
         const userData = this._api.updateUserInfo();
         userData.then((item) => {
-            this._setUserInfo(item);
+            this.setUserInfo(item);
             return item;
         }).catch((err) => alert(err));
     }
@@ -20,7 +20,7 @@ export default class UserInfo {
         return userInfo;
     }
 
-    _setUserInfo = (item) => {
+    setUserInfo = (item) => {
         this._profileName.textContent = item.name;
         this._profileJob.textContent = item.about;
         this._avatar.src = item.avatar;
@@ -32,24 +32,24 @@ export default class UserInfo {
         return avatar;
     }
 
-    _setAvatar = (item) => {
+    setAvatar = (item) => {
         this._avatar.src = item.avatar;
     }
 
-    changeUserInfo = (data) => {
-        const updateData = this._api.editProfile({
-            name: data.nameInput,
-            about: data.jobInput
-        });
-        updateData.then((item) => {
-            this._setUserInfo(item);
-        }).catch((err) => alert(err));
-    }
+    // changeUserInfo = (data) => {
+    //     const updateData = this._api.editProfile({
+    //         name: data.nameInput,
+    //         about: data.jobInput
+    //     });
+    //     updateData.then((item) => {
+    //         this._setUserInfo(item);
+    //     }).catch((err) => alert(err));
+    // }
   
-    changeAvatar = (url) => {
-        const updateUrl = this._api.changeAvatar(url);
-        updateUrl.then((item) => {
-            this._setAvatar(item);       
-        }).catch((err) => console.log(err));
-    }
+    // changeAvatar = (url) => {
+    //     const updateUrl = this._api.changeAvatar(url);
+    //     updateUrl.then((item) => {
+    //         this._setAvatar(item);       
+    //     }).catch((err) => console.log(err));
+    // }
 }
