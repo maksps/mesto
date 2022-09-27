@@ -35,21 +35,4 @@ export default class UserInfo {
     setAvatar = (item) => {
         this._avatar.src = item.avatar;
     }
-
-    // changeUserInfo = (data) => {
-    //     const updateData = this._api.editProfile({
-    //         name: data.nameInput,
-    //         about: data.jobInput
-    //     });
-    //     updateData.then((item) => {
-    //         this._setUserInfo(item);
-    //     }).catch((err) => alert(err));
-    // }
-  
-    // changeAvatar = (url) => {
-    //     const updateUrl = this._api.changeAvatar(url);
-    //     updateUrl.then((item) => {
-    //         this._setAvatar(item);       
-    //     }).catch((err) => console.log(err));
-    // }
 }

@@ -70,7 +70,7 @@ function createCard(item, userId) {
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleSubmitForm: (data, button) => {
-    renderLoading(true, button, 'Сохранение...');
+    renderLoading(true, button);
     const updateUserData = api.editProfile({
       name: data.nameInput,
       about: data.jobInput
@@ -79,7 +79,8 @@ const popupEdit = new PopupWithForm({
       userInfo.setUserInfo(item);
     }).catch((err) => alert(err))
       .finally(() => {
-        renderLoading(false, button, 'Сохранить');
+        popupEdit.close();
+        renderLoading(false, button);
       });
   }
 });
@@ -96,12 +97,14 @@ popupWithConfirm.setEventListeners();
 const popupAvatarChange = new PopupWithForm({
   popupSelector: '.popup_avatar',
   handleSubmitForm: (data, button) => {
-    renderLoading(true, button, 'сохранение...');
+    renderLoading(true, button);
     const updateUrl = api.changeAvatar(data);
     updateUrl.then((item) => {
       userInfo.setAvatar(item);
     }).catch((err) => console.log(err))
-      .finally(() => { renderLoading(false, button, 'Сохранить'); });
+      .finally(() => { 
+        popupAvatarChange.close();
+        renderLoading(false, button); });
   }
 });
 
@@ -132,14 +135,16 @@ getUserInfo.then((info) => {
 
     const popupAdd = new PopupWithForm({
       popupSelector: '.popup_add',
-      handleSubmitForm: (data) => {
-
+      handleSubmitForm: (data, button) => {
         const newCard = api.addCard(data);
-        renderLoading(isLoading, button, loadingInfo);
+        renderLoading(true, button);
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        }).catch((err) => alert(err));
+        }).catch((err) => alert(err))
+        .finally(() => {
+          popupAdd.close();
+          renderLoading(false, button)});
 
       }
     });
@@ -150,12 +155,12 @@ getUserInfo.then((info) => {
   }).catch((err) => alert(err));
 }).catch((err) => alert(err));
 
-function renderLoading(isLoading, button, loadingInfo) {
+function renderLoading(isLoading, button) {
   if (isLoading) {
-    button.textContent = loadingInfo;
+    button.textContent = 'Cохранение...';
   }
   else if (!isLoading) {
-    button.textContent = loadingInfo;
+    button.textContent = 'Сохранить';
   }
 }
 
