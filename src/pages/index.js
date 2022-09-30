@@ -77,7 +77,7 @@ const popupEdit = new PopupWithForm({
     });
     updateUserData.then((item) => {
       userInfo.setUserInfo(item);
-    }).catch((err) => alert(err))
+    }).catch((err) => console.log(err))
       .finally(() => {
         popupEdit.close();
         renderLoading(false, button);
@@ -141,7 +141,7 @@ getUserInfo.then((info) => {
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        }).catch((err) => alert(err))
+        }).catch((err) => console.log(err))
         .finally(() => {
           popupAdd.close();
           renderLoading(false, button)});
@@ -152,8 +152,8 @@ getUserInfo.then((info) => {
 
 
 
-  }).catch((err) => alert(err));
-}).catch((err) => alert(err));
+  }).catch((err) => console.log(err));
+}).catch((err) => console.log(err));
 
 function renderLoading(isLoading, button) {
   if (isLoading) {

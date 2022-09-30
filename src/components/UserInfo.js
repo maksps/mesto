@@ -12,7 +12,7 @@ export default class UserInfo {
         userData.then((item) => {
             this.setUserInfo(item);
             return item;
-        }).catch((err) => alert(err));
+        }).catch((err) => console.log(err));
     }
 
     getUserInfo = () => {
