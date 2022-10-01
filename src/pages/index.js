@@ -102,9 +102,10 @@ const popupAvatarChange = new PopupWithForm({
     updateUrl.then((item) => {
       userInfo.setAvatar(item);
     }).catch((err) => console.log(err))
-      .finally(() => { 
+      .finally(() => {
         popupAvatarChange.close();
-        renderLoading(false, button); });
+        renderLoading(false, button);
+      });
   }
 });
 
@@ -141,10 +142,11 @@ getUserInfo.then((info) => {
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        }).catch((err) => close.log(err.message) )
-        .finally(() => {
-          popupAdd.close();
-          renderLoading(false, button)});
+        }).catch((err) => close.log(err))
+          .finally(() => {
+            popupAdd.close();
+            renderLoading(false, button)
+          });
 
       }
     });
