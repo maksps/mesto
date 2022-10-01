@@ -141,7 +141,7 @@ getUserInfo.then((info) => {
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        }).catch((err) => console.log(err))
+        }).catch((err) => close.log(err.message) )
         .finally(() => {
           popupAdd.close();
           renderLoading(false, button)});
