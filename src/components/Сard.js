@@ -45,6 +45,8 @@ export class Card {
             .then(() => {
                 this._card.remove();
                 this._card = null;
+                this._popupWithConfirm.close();
+
             }).catch((err) => console.log(err));
     }
 

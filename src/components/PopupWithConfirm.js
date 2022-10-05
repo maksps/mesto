@@ -13,7 +13,7 @@ export default class PopupWithIConfirm extends Popup {
         this._confirmButton.addEventListener('click', (evt) => {
             evt.stopImmediatePropagation();
             this._handleClickConfirm();
-            this.close();
+            // this.close();
         });
     }
 
