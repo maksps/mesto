@@ -100,6 +100,7 @@ const popupAvatarChange = new PopupWithForm({
     renderLoading(true, button);
     const updateUrl = api.changeAvatar(data);
     updateUrl.then((item) => {
+      console.log(item); // промис
       userInfo.setAvatar(item);
     }).catch((err) => console.log(err))
       .finally(() => {
