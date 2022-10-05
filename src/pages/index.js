@@ -40,7 +40,7 @@ buttonEdit.addEventListener('click', function () {
 
 buttonAvatar.addEventListener('click', function () {
   const userAvatar = userInfo.getAvatar();
-  avatarInput.value = userAvatar;
+  // avatarInput.value = userAvatar;
   popupAvatarChange.open();
   profileValidation.resetValidation();
 });
