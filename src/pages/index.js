@@ -13,6 +13,8 @@ import {
   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput, saveButtons
 } from '../utils/constants.js';
 
+const userIform = null;
+
 const api = new Api(
   {
     url: 'https://mesto.nomoreparties.co/v1/cohort-50/',
@@ -20,7 +22,7 @@ const api = new Api(
       authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
       'content-type': 'application/json',
     },
-  })
+  });
 
 
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar-img' }, api);
@@ -77,9 +79,10 @@ const popupEdit = new PopupWithForm({
     });
     updateUserData.then((item) => {
       userInfo.setUserInfo(item);
+      popupEdit.close();
     }).catch((err) => console.log(err))
       .finally(() => {
-        popupEdit.close();
+
         renderLoading(false, button);
       });
   }
@@ -100,16 +103,14 @@ const popupAvatarChange = new PopupWithForm({
     renderLoading(true, button);
     const updateUrl = api.changeAvatar(data);
     updateUrl.then((item) => {
-      console.log(item); // промис
       userInfo.setAvatar(item);
+      popupAvatarChange.close();
     }).catch((err) => console.log(err))
       .finally(() => {
-        popupAvatarChange.close();
         renderLoading(false, button);
       });
   }
 });
-
 popupAvatarChange.setEventListeners();
 
 const getUserInfo = api.updateUserInfo();
@@ -143,9 +144,9 @@ getUserInfo.then((info) => {
         newCard.then((item) => {
           const card = createCard(item, userId);
           defaultCardList.addItem(card);
-        }).catch((err) => close.log(err))
+          popupAdd.close();
+        }).catch((err) => console.log(err))
           .finally(() => {
-            popupAdd.close();
             renderLoading(false, button)
           });
 
