@@ -13,7 +13,7 @@ import {
   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput, saveButtons
 } from '../utils/constants.js';
 
-const userIform = null;
+let userId = null;
 
 const api = new Api(
   {
@@ -22,52 +22,18 @@ const api = new Api(
       authorization: '6df29fdd-ef30-40f2-9646-a62800cbaefa',
       'content-type': 'application/json',
     },
-  });
+  }
+);
 
+const userInfo = new UserInfo({
+  profileNameSelector: '.profile__name',
+  profileJobSelector: '.profile__job',
+  profileAvatarSelector: '.profile__avatar-img'
+},
+  api
+);
 
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__job', profileAvatarSelector: '.profile__avatar-img' }, api);
-userInfo.getUserInfoFromApi();
-
-function setInputEditFormValue() {
-  const userInfoContent = userInfo.getUserInfo();
-  nameInput.value = userInfoContent.name;
-  jobInput.value = userInfoContent.job;
-}
-
-buttonEdit.addEventListener('click', function () {
-  setInputEditFormValue();
-  popupEdit.open();
-  profileValidation.resetValidation();
-});
-
-buttonAvatar.addEventListener('click', function () {
-  const userAvatar = userInfo.getAvatar();
-  // avatarInput.value = userAvatar;
-  popupAvatarChange.open();
-  profileValidation.resetValidation();
-});
-
-
-
-function handleCardClick(link, name) {
-  popupWithImage.open(link, name);
-}
-
-const profileValidation = new FormValidator(formSelectors, formElementEdit);
-const newCardValidation = new FormValidator(formSelectors, formElementAdd);
-const avatarValidation = new FormValidator(formSelectors, formAvatar);
-profileValidation.enableValidation();
-newCardValidation.enableValidation();
-avatarValidation.enableValidation();
-
-
-function createCard(item, userId) {
-  const card = new Card(item, templateSelector, handleCardClick, api, userId);
-  const cardMarkup = card.createCardMarkup();
-  card.setButtonDelete(popupWithConfirm, item);
-  return cardMarkup;
-}
-
+userInfo.getUserInfoFromApi();// наверное потом убрать
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
@@ -112,6 +78,54 @@ const popupAvatarChange = new PopupWithForm({
   }
 });
 popupAvatarChange.setEventListeners();
+
+const profileValidation = new FormValidator(formSelectors, formElementEdit);
+const newCardValidation = new FormValidator(formSelectors, formElementAdd);
+const avatarValidation = new FormValidator(formSelectors, formAvatar);
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
+avatarValidation.enableValidation();
+
+function createCard(item, userId) {
+  const card = new Card(item, templateSelector, handleCardClick, api, userId);
+  const cardMarkup = card.createCardMarkup();
+  card.setButtonDelete(popupWithConfirm, item);
+  return cardMarkup;
+}
+
+
+function setInputEditFormValue() {
+  const userInfoContent = userInfo.getUserInfo();
+  nameInput.value = userInfoContent.name;
+  jobInput.value = userInfoContent.job;
+}
+
+buttonEdit.addEventListener('click', function () {
+  setInputEditFormValue();
+  popupEdit.open();
+  profileValidation.resetValidation();
+});
+
+buttonAvatar.addEventListener('click', function () {
+  const userAvatar = userInfo.getAvatar();
+  // avatarInput.value = userAvatar;
+  popupAvatarChange.open();
+  profileValidation.resetValidation();
+});
+
+
+
+function handleCardClick(link, name) {
+  popupWithImage.open(link, name);
+}
+
+
+
+
+
+
+
+
 
 const getUserInfo = api.updateUserInfo();
 getUserInfo.then((info) => {
