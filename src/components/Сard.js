@@ -1,7 +1,7 @@
 
 export class Card {
 
-    constructor(item, templateSelector, handleCardClick, api, userId) {
+    constructor(item, templateSelector,userId, handleCardClick, handleDeleteClick,  handleLikeClick) {
         this._name = item.name;
         this._link = item.link;
         this._likes = item.likes;
@@ -9,8 +9,11 @@ export class Card {
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
-        this._api = api;
-        this._userId = userId;
+        this._handleDeleteClick = handleDeleteClick;
+        this._handleLikeClick = handleLikeClick
+        // this._api = api;
+        this._userId = userId; // сдесь почемуто null
+        console.log(this._userId);
     }
 
     createCardMarkup = () => {
@@ -25,6 +28,7 @@ export class Card {
         this._setListeners();
         this._setCountLike();
         this._setChekedLike();
+        // this.setButtonDelete();
         return this._card
     }
 
@@ -40,33 +44,33 @@ export class Card {
     }
 
     _handleClickConfirm = () => {
-
         this._api.deleteCard(this._id)
             .then(() => {
                 this._card.remove();
                 this._card = null;
                 this._popupWithConfirm.close();
-
             }).catch((err) => console.log(err));
     }
 
+setLikesCount = (cardInfo) => {
+    this._likeCount.textContent = cardInfo.likes.length;
+}
 
 
-    _toggleLike = () => {
-        this._buttonLike.classList.toggle('element__like_checked');
-        if (this._buttonLike.classList.contains('element__like_checked')) {
-            this._api.setLike(this._id)
-                .then((item) => {
-                    this._likeCount.textContent = item.likes.length;
-                }).catch((err) => console.log(err));
-        } else {
-            this._api.deleteLike(this._id)
-                .then((item) => {
-                    this._likeCount.textContent = item.likes.length;
-                }).catch((err) => console.log(err));
-        }
-
-    }
+    // _toggleLike = () => {
+    //     this._buttonLike.classList.toggle('element__like_checked');
+    //     if (this._buttonLike.classList.contains('element__like_checked')) {
+    //         this._api.setLike(this._id)
+    //             .then((item) => {
+    //                 this._likeCount.textContent = item.likes.length;
+    //             }).catch((err) => console.log(err));
+    //     } else {
+    //         this._api.deleteLike(this._id)
+    //             .then((item) => {
+    //                 this._likeCount.textContent = item.likes.length;
+    //             }).catch((err) => console.log(err));
+    //     }
+    // }
 
     setButtonDelete = (popupWithConfirm, item) => {
         if (item.owner._id === this._userId) {

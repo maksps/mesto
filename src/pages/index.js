@@ -15,6 +15,8 @@ import {
 
 let userId = null;
 
+
+
 const api = new Api(
   {
     url: 'https://mesto.nomoreparties.co/v1/cohort-50/',
@@ -29,11 +31,27 @@ const userInfo = new UserInfo({
   profileNameSelector: '.profile__name',
   profileJobSelector: '.profile__job',
   profileAvatarSelector: '.profile__avatar-img'
-},
-  api
+}
 );
 
-userInfo.getUserInfoFromApi();// наверное потом убрать
+
+
+const getUserInfoFromApi = () => {
+  const userData = api.updateUserInfo();
+  userData.then((item) => {
+      userInfo.setUserInfo(item);
+      return item;
+  }).catch((err) => console.log(err));
+}
+getUserInfoFromApi();// наверное потом убрать
+
+
+const getUserInfo = api.updateUserInfo();
+getUserInfo.then((info) => {
+  userId = info._id;
+  console.log(userId);
+}).catch((err) => console.log(err));
+
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
@@ -79,6 +97,29 @@ const popupAvatarChange = new PopupWithForm({
 });
 popupAvatarChange.setEventListeners();
 
+const popupAdd = new PopupWithForm({
+  popupSelector: '.popup_add',
+  handleSubmitForm: (data, button) => {
+    const newCard = api.addCard(data);
+    renderLoading(true, button);
+    newCard.then((item) => {
+      const card = createCard(item, userId);
+      defaultCardList.addItem(card);
+      popupAdd.close();
+    }).catch((err) => console.log(err))
+      .finally(() => {
+        renderLoading(false, button)
+      });
+
+  }
+});
+popupAdd.setEventListeners();
+
+buttonAdd.addEventListener('click', function () {
+  popupAdd.open();
+  newCardValidation.resetValidation();
+});
+
 const profileValidation = new FormValidator(formSelectors, formElementEdit);
 const newCardValidation = new FormValidator(formSelectors, formElementAdd);
 const avatarValidation = new FormValidator(formSelectors, formAvatar);
@@ -86,12 +127,21 @@ profileValidation.enableValidation();
 newCardValidation.enableValidation();
 avatarValidation.enableValidation();
 
-function createCard(item, userId) {
-  const card = new Card(item, templateSelector, handleCardClick, api, userId);
+
+
+const createCard = (item, userId) => {
+  const card = new Card(
+    item,
+    templateSelector,
+    userId,
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick
+  )
+
   const cardMarkup = card.createCardMarkup();
-  card.setButtonDelete(popupWithConfirm, item);
   return cardMarkup;
-}
+};
 
 
 function setInputEditFormValue() {
@@ -108,7 +158,6 @@ buttonEdit.addEventListener('click', function () {
 
 buttonAvatar.addEventListener('click', function () {
   const userAvatar = userInfo.getAvatar();
-  // avatarInput.value = userAvatar;
   popupAvatarChange.open();
   profileValidation.resetValidation();
 });
@@ -117,61 +166,47 @@ buttonAvatar.addEventListener('click', function () {
 
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
+};
+const handleDeleteClick = (card) => {
+  popupWithConfirm.open();
+  popupWithConfirm.setConfirmAcion(() => {
+    api.deleteCard(userId)
+      .then(() => {
+        card.remove();
+        card = null;
+        popupWithConfirm.close();
+      }).catch((err) => console.log(err));
+  })
+};
+
+const handleLikeClick = (card) => {
+  api.deleteLike(item.id)
+    .then((cardInfo) => {
+      card.setLikesCount(cardInfo);
+    }).catch((err) => console.log(err));
 }
 
 
 
 
+const defaultCardList = new Section({
+  renderer: (item) => {
+
+    const card = createCard(item, userId);
+    defaultCardList.addItem(card);
+
+  }
+}, cardsContainerSelector);
+
+
+const cards = api.getAllCards();
+cards.then((cards) => {
+  defaultCardList.render(cards);
+}).catch((err) => console.log(`При загрузке карточек произошла ошибка:${err}`));
 
 
 
 
-
-const getUserInfo = api.updateUserInfo();
-getUserInfo.then((info) => {
-  const userId = info._id;
-
-  const cards = api.getAllCards();
-  cards.then((cards) => {
-    const defaultCardList = new Section({
-      items: cards,
-      renderer: (item) => {
-        const card = createCard(item, userId);
-        defaultCardList.addItem(card);
-      }
-    }, cardsContainerSelector);
-    defaultCardList.render();
-
-
-    buttonAdd.addEventListener('click', function () {
-      popupAdd.open();
-      newCardValidation.resetValidation();
-    });
-
-
-
-    const popupAdd = new PopupWithForm({
-      popupSelector: '.popup_add',
-      handleSubmitForm: (data, button) => {
-        const newCard = api.addCard(data);
-        renderLoading(true, button);
-        newCard.then((item) => {
-          const card = createCard(item, userId);
-          defaultCardList.addItem(card);
-          popupAdd.close();
-        }).catch((err) => console.log(err))
-          .finally(() => {
-            renderLoading(false, button)
-          });
-
-      }
-    });
-    popupAdd.setEventListeners();
-
-
-
-  }).catch((err) => console.log(err));
-}).catch((err) => console.log(err));
 
 function renderLoading(isLoading, button) {
   if (isLoading) {
@@ -181,4 +216,6 @@ function renderLoading(isLoading, button) {
     button.textContent = 'Сохранить';
   }
 }
+
+
 

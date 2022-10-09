@@ -1,19 +1,17 @@
 export default class UserInfo {
-    constructor({ profileNameSelector, profileJobSelector, profileAvatarSelector }, api) {
+    constructor({ profileNameSelector, profileJobSelector, profileAvatarSelector }) {
         this._profileName = document.querySelector(profileNameSelector);
         this._profileJob = document.querySelector(profileJobSelector);
         this._avatar = document.querySelector(profileAvatarSelector);
-
-        this._api = api;
     }
 
-    getUserInfoFromApi = () => {
-        const userData = this._api.updateUserInfo();
-        userData.then((item) => {
-            this.setUserInfo(item);
-            return item;
-        }).catch((err) => console.log(err));
-    }
+    // getUserInfoFromApi = () => {
+    //     const userData = this._api.updateUserInfo();
+    //     userData.then((item) => {
+    //         this.setUserInfo(item);
+    //         return item;
+    //     }).catch((err) => console.log(err));
+    // }
 
     getUserInfo = () => {
         const userInfo = { name: this._profileName.textContent, job: this._profileJob.textContent};
