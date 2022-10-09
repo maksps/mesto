@@ -9,7 +9,7 @@ export default class Api {
         if (!res.ok) {
             Promise.reject(`Ошибка: ${res.status}`);
         }
-       return res.json()
+        return res.json()
     }
 
     getAllCards() {
@@ -48,7 +48,6 @@ export default class Api {
         });
     }
     deleteCard(id) {
-        console.log(id);
         return fetch(`${this._url}${'cards/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
@@ -62,7 +61,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers,
         }).then((res) => {
-            
+
             return this._getResponseData(res);
         });
     }
@@ -87,9 +86,4 @@ export default class Api {
             return this._getResponseData(res);
         });
     }
-
-
-
-
-
 }

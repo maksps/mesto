@@ -32,18 +32,6 @@ const userInfo = new UserInfo({
 }
 );
 
-
-
-const getUserInfoFromApi = () => {
-  const userData = api.updateUserInfo();
-  userData.then((item) => {
-    userInfo.setUserInfo(item);
-    userId = item._id;
-    return item;
-  }).catch((err) => console.log(err));
-}
-getUserInfoFromApi();
-
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleSubmitForm: (data) => {
@@ -188,20 +176,28 @@ const defaultCardList = new Section({
 }, cardsContainerSelector);
 
 
-const cards = api.getAllCards();
-cards.then((cards) => {
-  defaultCardList.render(cards);
-}).catch((err) => console.log(`При загрузке карточек произошла ошибка:${err}`));
+const getUserInfoFromApi = () => {
+  const userData = api.updateUserInfo();
+  userData.then((item) => {
+    userInfo.setUserInfo(item);
+    userId = item._id;
+    return item;
+  }).catch((err) => console.log(err));
+}
+getUserInfoFromApi();
 
-// Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить 
-// api.getUserInfo(), 
-// api.getInitialCards() ]) 
-// .then(([info, initialCards])=>{    //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
-// ......................              //все данные получены, отрисовываем страницу 
-// }) 
-// .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
-// console.log(err);
-//  }) 
+
+Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить 
+  api.updateUserInfo(),
+  api.getAllCards()])
+  .then(([item, cards]) => {
+    userInfo.setUserInfo(item);
+    userId = item._id;   //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
+    defaultCardList.render(cards);     //все данные получены, отрисовываем страницу 
+  })
+  .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
+    console.log(err);
+  })
 
 
 function renderLoading(isLoading, popup) {
