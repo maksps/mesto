@@ -46,8 +46,8 @@ getUserInfoFromApi();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
-  handleSubmitForm: (data, button) => {
-    renderLoading(true, button);
+  handleSubmitForm: (data) => {
+    renderLoading(true, popupEdit);
     const updateUserData = api.editProfile({
       name: data.nameInput,
       about: data.jobInput
@@ -58,7 +58,7 @@ const popupEdit = new PopupWithForm({
     }).catch((err) => console.log(err))
       .finally(() => {
 
-        renderLoading(false, button);
+        renderLoading(false, popupEdit);
       });
   }
 });
@@ -74,15 +74,15 @@ popupWithConfirm.setEventListeners();
 
 const popupAvatarChange = new PopupWithForm({
   popupSelector: '.popup_avatar',
-  handleSubmitForm: (data, button) => {
-    renderLoading(true, button);
+  handleSubmitForm: (data) => {
+    renderLoading(true, popupAvatarChange);
     const updateUrl = api.changeAvatar(data);
     updateUrl.then((item) => {
       userInfo.setAvatar(item);
       popupAvatarChange.close();
     }).catch((err) => console.log(err))
       .finally(() => {
-        renderLoading(false, button);
+        renderLoading(false, popupAvatarChange);
       });
   }
 });
@@ -90,16 +90,16 @@ popupAvatarChange.setEventListeners();
 
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_add',
-  handleSubmitForm: (data, button) => {
+  handleSubmitForm: (data) => {
     const newCard = api.addCard(data);
-    renderLoading(true, button);
+    renderLoading(true, popupAdd);
     newCard.then((item) => {
       const card = createCard(item);
       defaultCardList.addItem(card);
       popupAdd.close();
     }).catch((err) => console.log(err))
       .finally(() => {
-        renderLoading(false, button)
+        renderLoading(false, popupAdd)
       });
 
   }
@@ -156,7 +156,6 @@ const createCard = (item) => {
     }
   }
   )
-
   const cardMarkup = card.createCardMarkup();
   return cardMarkup;
 };
@@ -183,10 +182,8 @@ buttonAvatar.addEventListener('click', function () {
 
 const defaultCardList = new Section({
   renderer: (item) => {
-
     const card = createCard(item);
     defaultCardList.addItem(card);
-
   }
 }, cardsContainerSelector);
 
@@ -197,13 +194,8 @@ cards.then((cards) => {
 }).catch((err) => console.log(`При загрузке карточек произошла ошибка:${err}`));
 
 
-function renderLoading(isLoading, button) {
-  if (isLoading) {
-    button.textContent = 'Cохранение...';
-  }
-  else if (!isLoading) {
-    button.textContent = 'Сохранить';
-  }
+function renderLoading(isLoading, popup) {
+  popup.setLoadingButton(isLoading)
 }
 
 

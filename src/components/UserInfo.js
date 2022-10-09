@@ -5,13 +5,6 @@ export default class UserInfo {
         this._avatar = document.querySelector(profileAvatarSelector);
     }
 
-    // getUserInfoFromApi = () => {
-    //     const userData = this._api.updateUserInfo();
-    //     userData.then((item) => {
-    //         this.setUserInfo(item);
-    //         return item;
-    //     }).catch((err) => console.log(err));
-    // }
 
     getUserInfo = () => {
         const userInfo = { name: this._profileName.textContent, job: this._profileJob.textContent};

@@ -12,9 +12,7 @@ export class Card {
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
-        this._userId = userId; // сдесь почемуто null или Id какаято хрннь
-        console.log(this._userId);
-
+        this._userId = userId;
     }
 
     createCardMarkup = () => {
