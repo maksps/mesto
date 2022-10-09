@@ -44,12 +44,10 @@ export class Card {
     }
 
     toggleLike = () => {
-        console.log("qwerty");
         this._buttonLike.classList.toggle('element__like_checked');
     }
 
     _setButtonDelete = () => {
-        console.log(this._item.owner._id);
         if (this._item.owner._id === this._userId) {
             this._buttonDelete.classList.add('element__btn-delete_seted');
         }
@@ -69,5 +67,10 @@ export class Card {
                 this._buttonLike.classList.add('element__like_checked');
             }
         });
+    }
+
+    deleteCard = () => {
+        this._card.remove();
+        this._card = null;
     }
 }

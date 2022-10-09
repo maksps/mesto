@@ -7,15 +7,13 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import { Popup } from '../components/Popup.js';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js'
+import Api from '../components/Api.js';
 import {
   buttonEdit, buttonAdd, buttonAvatar, nameInput, jobInput, formElementEdit,
   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput, saveButtons
 } from '../utils/constants.js';
 
-let userId = 'aeec8bcd4663f0fdd55a07a0';
-
-
+let userId = null;
 
 const api = new Api(
   {
@@ -40,18 +38,11 @@ const getUserInfoFromApi = () => {
   const userData = api.updateUserInfo();
   userData.then((item) => {
     userInfo.setUserInfo(item);
+    userId = item._id;
     return item;
   }).catch((err) => console.log(err));
 }
-getUserInfoFromApi();// наверное потом убрать
-
-
-const getUserInfo = api.updateUserInfo();
-getUserInfo.then((info) => {
-  userId = info._id;
-  console.log(userId);
-}).catch((err) => console.log(err));
-
+getUserInfoFromApi();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
@@ -103,7 +94,7 @@ const popupAdd = new PopupWithForm({
     const newCard = api.addCard(data);
     renderLoading(true, button);
     newCard.then((item) => {
-      const card = createCard(item, userId);
+      const card = createCard(item);
       defaultCardList.addItem(card);
       popupAdd.close();
     }).catch((err) => console.log(err))
@@ -129,7 +120,7 @@ avatarValidation.enableValidation();
 
 
 
-const createCard = (item, userId) => {
+const createCard = (item) => {
   const card = new Card({
     item: item,
     templateSelector: templateSelector,
@@ -143,16 +134,12 @@ const createCard = (item, userId) => {
         evt.stopImmediatePropagation();
         api.deleteCard(card._id)
           .then(() => {
-            console.log(card);
-            card.remove();
-            card = null;
+            card.deleteCard();
             popupWithConfirm.close();
           }).catch((err) => console.log(err));
       })
     },
     handleLikeClick: () => {
-      
-      console.log(card.isLiked());
       if (!card.isLiked()) {
         api.setLike(card._id)
           .then((item) => {
@@ -169,6 +156,7 @@ const createCard = (item, userId) => {
     }
   }
   )
+
   const cardMarkup = card.createCardMarkup();
   return cardMarkup;
 };
@@ -193,47 +181,10 @@ buttonAvatar.addEventListener('click', function () {
 });
 
 
-
-// function handleCardClick(link, name) {
-//   popupWithImage.open(link, name);
-// };
-
-// const handleDeleteClick = (card) => {
-//   popupWithConfirm.open();
-//   popupWithConfirm.setConfirmAction((evt) => {
-//     evt.stopImmediatePropagation();
-//     api.deleteCard(userId)
-//       .then(() => {
-//         card.remove();
-//         card = null;
-//         popupWithConfirm.close();
-//       }).catch((err) => console.log(err));
-//   })
-// };
-
-// const handleLikeClick = (card) => {
-//   card.toggleLike();
-//   if (card.isLiked()) {
-//     api.setLike(card._id)
-//       .then((item) => {
-//         card.changeLikeCount(item);
-//       }).catch((err) => console.log(err));
-//   } else {
-//     api.deleteLike(card._id)
-//       .then((item) => {
-//         changeLikeCount(item);
-//       }).catch((err) => console.log(err));
-//   }
-// }
-
-
-
-
-
 const defaultCardList = new Section({
   renderer: (item) => {
 
-    const card = createCard(item, userId);
+    const card = createCard(item);
     defaultCardList.addItem(card);
 
   }
@@ -244,9 +195,6 @@ const cards = api.getAllCards();
 cards.then((cards) => {
   defaultCardList.render(cards);
 }).catch((err) => console.log(`При загрузке карточек произошла ошибка:${err}`));
-
-
-
 
 
 function renderLoading(isLoading, button) {
