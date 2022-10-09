@@ -169,7 +169,8 @@ function handleCardClick(link, name) {
 };
 const handleDeleteClick = (card) => {
   popupWithConfirm.open();
-  popupWithConfirm.setConfirmAcion(() => {
+  popupWithConfirm.setConfirmAction((evt) => {
+    evt.stopImmediatePropagation();
     api.deleteCard(userId)
       .then(() => {
         card.remove();

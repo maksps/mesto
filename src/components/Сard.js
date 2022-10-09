@@ -1,7 +1,7 @@
 
 export class Card {
 
-    constructor(item, templateSelector,userId, handleCardClick, handleDeleteClick,  handleLikeClick) {
+    constructor(item, templateSelector, userId, handleCardClick, handleDeleteClick, handleLikeClick) {
         this._item = item;
         this._name = item.name;
         this._link = item.link;
@@ -34,7 +34,7 @@ export class Card {
     }
 
     _setListeners = () => {
-        this._buttonDelete.addEventListener('click', this._handleDelete);
+        this._buttonDelete.addEventListener('click', this._handleDeleteClick);
         this._buttonLike.addEventListener('click', this._toggleLike);
         this._elementImage.addEventListener('click', () => { this._handleCardClick(this._link, this._name) });
     }
@@ -44,18 +44,18 @@ export class Card {
         this._popupWithConfirm.setEventListeners(this._handleClickConfirm);
     }
 
-    _handleClickConfirm = () => {
-        this._api.deleteCard(this._id)
-            .then(() => {
-                this._card.remove();
-                this._card = null;
-                this._popupWithConfirm.close();
-            }).catch((err) => console.log(err));
-    }
+    // _handleClickConfirm = () => {
+    //     this._api.deleteCard(this._id)
+    //         .then(() => {
+    //             this._card.remove();
+    //             this._card = null;
+    //             this._popupWithConfirm.close();
+    //         }).catch((err) => console.log(err));
+    // }
 
-setLikesCount = (cardInfo) => {
-    this._likeCount.textContent = cardInfo.likes.length;
-}
+    // setLikesCount = (cardInfo) => {
+    //     this._likeCount.textContent = cardInfo.likes.length;
+    // }
 
 
     // _toggleLike = () => {
