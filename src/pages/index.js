@@ -193,6 +193,16 @@ cards.then((cards) => {
   defaultCardList.render(cards);
 }).catch((err) => console.log(`При загрузке карточек произошла ошибка:${err}`));
 
+// Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить 
+// api.getUserInfo(), 
+// api.getInitialCards() ]) 
+// .then(([info, initialCards])=>{    //попадаем сюда, когда оба промиса будут выполнены, деструктурируем ответ
+// ......................              //все данные получены, отрисовываем страницу 
+// }) 
+// .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
+// console.log(err);
+//  }) 
+
 
 function renderLoading(isLoading, popup) {
   popup.setLoadingButton(isLoading)
