@@ -2,6 +2,7 @@
 export class Card {
 
     constructor(item, templateSelector,userId, handleCardClick, handleDeleteClick,  handleLikeClick) {
+        this._item = item;
         this._name = item.name;
         this._link = item.link;
         this._likes = item.likes;
@@ -28,7 +29,7 @@ export class Card {
         this._setListeners();
         this._setCountLike();
         this._setChekedLike();
-        // this.setButtonDelete();
+        this._setButtonDelete();
         return this._card
     }
 
@@ -72,9 +73,8 @@ setLikesCount = (cardInfo) => {
     //     }
     // }
 
-    setButtonDelete = (popupWithConfirm, item) => {
-        if (item.owner._id === this._userId) {
-            this._popupWithConfirm = popupWithConfirm;
+    _setButtonDelete = () => {
+        if (this._item.owner._id === this._userId) {
             this._buttonDelete.classList.add('element__btn-delete_seted');
         }
     }
