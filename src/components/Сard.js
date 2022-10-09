@@ -32,7 +32,7 @@ export class Card {
         this._setButtonDelete();
         return this._card
     }
-    
+
     isLiked = () => {
         return this._buttonLike.classList.contains('element__like_checked')
     }
@@ -43,45 +43,13 @@ export class Card {
         this._elementImage.addEventListener('click', () => { this._handleCardClick(this._link, this._name) });
     }
 
-    _handleDelete = () => {
-        this._popupWithConfirm.open();
-        this._popupWithConfirm.setEventListeners(this._handleClickConfirm);
-    }
-
-    // _handleClickConfirm = () => {
-    //     this._api.deleteCard(this._id)
-    //         .then(() => {
-    //             this._card.remove();
-    //             this._card = null;
-    //             this._popupWithConfirm.close();
-    //         }).catch((err) => console.log(err));
-    // }
-
-    // setLikesCount = (cardInfo) => {
-    //     this._likeCount.textContent = cardInfo.likes.length;
-    // }
-
-
-
     toggleLike = () => {
         console.log("qwerty");
         this._buttonLike.classList.toggle('element__like_checked');
-        // if (this.isLiked) {
-        //     this._api.setLike(this._id)
-        //         .then((item) => {
-        //             // this._likeCount.textContent = item.likes.length;
-        //             changeLikeCount(item);
-        //         }).catch((err) => console.log(err));
-        // } else {
-        //     this._api.deleteLike(this._id)
-        //         .then((item) => {
-        //             // this._likeCount.textContent = item.likes.length;
-        //             changeLikeCount(item);
-        //         }).catch((err) => console.log(err));
-        // }
     }
 
     _setButtonDelete = () => {
+        console.log(this._item.owner._id);
         if (this._item.owner._id === this._userId) {
             this._buttonDelete.classList.add('element__btn-delete_seted');
         }
@@ -102,5 +70,4 @@ export class Card {
             }
         });
     }
-
 }

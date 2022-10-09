@@ -62,6 +62,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers,
         }).then((res) => {
+            
             return this._getResponseData(res);
         });
     }
@@ -71,6 +72,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         }).then((res) => {
+            console.log(res);
             return this._getResponseData(res);
         });
     }

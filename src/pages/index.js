@@ -13,7 +13,7 @@ import {
   formElementAdd, templateSelector, cardsContainerSelector, formSelectors, initialCards, formAvatar, avatarInput, saveButtons
 } from '../utils/constants.js';
 
-let userId = null;
+let userId = 'aeec8bcd4663f0fdd55a07a0';
 
 
 
@@ -137,12 +137,13 @@ const createCard = (item, userId) => {
     handleCardClick: (link, name) => {
       popupWithImage.open(link, name);
     },
-    handleDeleteClick: (card) => {
+    handleDeleteClick: () => {
       popupWithConfirm.open();
       popupWithConfirm.setConfirmAction((evt) => {
         evt.stopImmediatePropagation();
-        api.deleteCard(userId)
+        api.deleteCard(card._id)
           .then(() => {
+            console.log(card);
             card.remove();
             card = null;
             popupWithConfirm.close();
