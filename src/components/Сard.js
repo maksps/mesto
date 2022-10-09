@@ -10,12 +10,10 @@ export class Card {
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
-        this._handleDeleteClick = handleDeleteClick.bind(this);
-        this._handleLikeClick = handleLikeClick.bind(this);
+        this._handleDeleteClick = handleDeleteClick;
+        this._handleLikeClick = handleLikeClick;
         this._userId = userId; // сдесь почемуто null или Id какаято хрннь
         console.log(this._userId);
-        // this.toggleLike = this.toggleLike.bind(this);
-        // this.isLiked = this.isLiked.bind(this);
 
     }
 
@@ -33,6 +31,10 @@ export class Card {
         this._setChekedLike();
         this._setButtonDelete();
         return this._card
+    }
+    
+    isLiked = () => {
+        return this._buttonLike.classList.contains('element__like_checked')
     }
 
     _setListeners = () => {
@@ -58,13 +60,12 @@ export class Card {
     // setLikesCount = (cardInfo) => {
     //     this._likeCount.textContent = cardInfo.likes.length;
     // }
-    isLiked = () => {
-        return this._buttonLike.classList.contains('element__like_checked')
-    }
+
+
 
     toggleLike = () => {
         console.log("qwerty");
-        this._buttonLike.classList.toggle('element__like_checked').bind(this);
+        this._buttonLike.classList.toggle('element__like_checked');
         // if (this.isLiked) {
         //     this._api.setLike(this._id)
         //         .then((item) => {

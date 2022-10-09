@@ -138,7 +138,6 @@ const createCard = (item, userId) => {
       popupWithImage.open(link, name);
     },
     handleDeleteClick: (card) => {
-      console.log(card);
       popupWithConfirm.open();
       popupWithConfirm.setConfirmAction((evt) => {
         evt.stopImmediatePropagation();
@@ -150,18 +149,20 @@ const createCard = (item, userId) => {
           }).catch((err) => console.log(err));
       })
     },
-    handleLikeClick: (card) => {
-      console.log(card);
-      card.toggleLike();
-      if (card.isLiked()) {
+    handleLikeClick: () => {
+      
+      console.log(card.isLiked());
+      if (!card.isLiked()) {
         api.setLike(card._id)
           .then((item) => {
             card.changeLikeCount(item);
+            card.toggleLike();
           }).catch((err) => console.log(err));
       } else {
         api.deleteLike(card._id)
           .then((item) => {
-            changeLikeCount(item);
+            card.changeLikeCount(item);
+            card.toggleLike();
           }).catch((err) => console.log(err));
       }
     }
