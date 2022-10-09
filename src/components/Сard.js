@@ -1,7 +1,7 @@
 
 export class Card {
 
-    constructor(item, templateSelector, userId, handleCardClick, handleDeleteClick, handleLikeClick) {
+    constructor({ item, templateSelector, userId, handleCardClick, handleDeleteClick, handleLikeClick }) {
         this._item = item;
         this._name = item.name;
         this._link = item.link;
@@ -10,11 +10,13 @@ export class Card {
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._template = document.querySelector(this._templateSelector).content.querySelector('.element');
-        this._handleDeleteClick = handleDeleteClick;
-        this._handleLikeClick = handleLikeClick
-        // this._api = api;
-        this._userId = userId; // сдесь почемуто null
+        this._handleDeleteClick = handleDeleteClick.bind(this);
+        this._handleLikeClick = handleLikeClick.bind(this);
+        this._userId = userId; // сдесь почемуто null или Id какаято хрннь
         console.log(this._userId);
+        // this.toggleLike = this.toggleLike.bind(this);
+        // this.isLiked = this.isLiked.bind(this);
+
     }
 
     createCardMarkup = () => {
@@ -35,7 +37,7 @@ export class Card {
 
     _setListeners = () => {
         this._buttonDelete.addEventListener('click', this._handleDeleteClick);
-        this._buttonLike.addEventListener('click', this._toggleLike);
+        this._buttonLike.addEventListener('click', this._handleLikeClick);
         this._elementImage.addEventListener('click', () => { this._handleCardClick(this._link, this._name) });
     }
 
@@ -56,22 +58,27 @@ export class Card {
     // setLikesCount = (cardInfo) => {
     //     this._likeCount.textContent = cardInfo.likes.length;
     // }
+    isLiked = () => {
+        return this._buttonLike.classList.contains('element__like_checked')
+    }
 
-
-    // _toggleLike = () => {
-    //     this._buttonLike.classList.toggle('element__like_checked');
-    //     if (this._buttonLike.classList.contains('element__like_checked')) {
-    //         this._api.setLike(this._id)
-    //             .then((item) => {
-    //                 this._likeCount.textContent = item.likes.length;
-    //             }).catch((err) => console.log(err));
-    //     } else {
-    //         this._api.deleteLike(this._id)
-    //             .then((item) => {
-    //                 this._likeCount.textContent = item.likes.length;
-    //             }).catch((err) => console.log(err));
-    //     }
-    // }
+    toggleLike = () => {
+        console.log("qwerty");
+        this._buttonLike.classList.toggle('element__like_checked').bind(this);
+        // if (this.isLiked) {
+        //     this._api.setLike(this._id)
+        //         .then((item) => {
+        //             // this._likeCount.textContent = item.likes.length;
+        //             changeLikeCount(item);
+        //         }).catch((err) => console.log(err));
+        // } else {
+        //     this._api.deleteLike(this._id)
+        //         .then((item) => {
+        //             // this._likeCount.textContent = item.likes.length;
+        //             changeLikeCount(item);
+        //         }).catch((err) => console.log(err));
+        // }
+    }
 
     _setButtonDelete = () => {
         if (this._item.owner._id === this._userId) {
@@ -81,6 +88,10 @@ export class Card {
 
     _setCountLike = () => {
         this._likeCount.textContent = this._likes.length;
+    }
+
+    changeLikeCount = (item) => {
+        this._likeCount.textContent = item.likes.length;
     }
 
     _setChekedLike = () => {

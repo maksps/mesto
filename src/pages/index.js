@@ -39,8 +39,8 @@ const userInfo = new UserInfo({
 const getUserInfoFromApi = () => {
   const userData = api.updateUserInfo();
   userData.then((item) => {
-      userInfo.setUserInfo(item);
-      return item;
+    userInfo.setUserInfo(item);
+    return item;
   }).catch((err) => console.log(err));
 }
 getUserInfoFromApi();// наверное потом убрать
@@ -130,15 +130,43 @@ avatarValidation.enableValidation();
 
 
 const createCard = (item, userId) => {
-  const card = new Card(
-    item,
-    templateSelector,
-    userId,
-    handleCardClick,
-    handleDeleteClick,
-    handleLikeClick
+  const card = new Card({
+    item: item,
+    templateSelector: templateSelector,
+    userId: userId,
+    handleCardClick: (link, name) => {
+      popupWithImage.open(link, name);
+    },
+    handleDeleteClick: (card) => {
+      console.log(card);
+      popupWithConfirm.open();
+      popupWithConfirm.setConfirmAction((evt) => {
+        evt.stopImmediatePropagation();
+        api.deleteCard(userId)
+          .then(() => {
+            card.remove();
+            card = null;
+            popupWithConfirm.close();
+          }).catch((err) => console.log(err));
+      })
+    },
+    handleLikeClick: (card) => {
+      console.log(card);
+      card.toggleLike();
+      if (card.isLiked()) {
+        api.setLike(card._id)
+          .then((item) => {
+            card.changeLikeCount(item);
+          }).catch((err) => console.log(err));
+      } else {
+        api.deleteLike(card._id)
+          .then((item) => {
+            changeLikeCount(item);
+          }).catch((err) => console.log(err));
+      }
+    }
+  }
   )
-
   const cardMarkup = card.createCardMarkup();
   return cardMarkup;
 };
@@ -164,28 +192,38 @@ buttonAvatar.addEventListener('click', function () {
 
 
 
-function handleCardClick(link, name) {
-  popupWithImage.open(link, name);
-};
-const handleDeleteClick = (card) => {
-  popupWithConfirm.open();
-  popupWithConfirm.setConfirmAction((evt) => {
-    evt.stopImmediatePropagation();
-    api.deleteCard(userId)
-      .then(() => {
-        card.remove();
-        card = null;
-        popupWithConfirm.close();
-      }).catch((err) => console.log(err));
-  })
-};
+// function handleCardClick(link, name) {
+//   popupWithImage.open(link, name);
+// };
 
-const handleLikeClick = (card) => {
-  api.deleteLike(item.id)
-    .then((cardInfo) => {
-      card.setLikesCount(cardInfo);
-    }).catch((err) => console.log(err));
-}
+// const handleDeleteClick = (card) => {
+//   popupWithConfirm.open();
+//   popupWithConfirm.setConfirmAction((evt) => {
+//     evt.stopImmediatePropagation();
+//     api.deleteCard(userId)
+//       .then(() => {
+//         card.remove();
+//         card = null;
+//         popupWithConfirm.close();
+//       }).catch((err) => console.log(err));
+//   })
+// };
+
+// const handleLikeClick = (card) => {
+//   card.toggleLike();
+//   if (card.isLiked()) {
+//     api.setLike(card._id)
+//       .then((item) => {
+//         card.changeLikeCount(item);
+//       }).catch((err) => console.log(err));
+//   } else {
+//     api.deleteLike(card._id)
+//       .then((item) => {
+//         changeLikeCount(item);
+//       }).catch((err) => console.log(err));
+//   }
+// }
+
 
 
 
