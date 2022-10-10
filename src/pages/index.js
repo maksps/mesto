@@ -117,14 +117,14 @@ const createCard = (item) => {
       popupWithImage.open(link, name);
     },
     handleDeleteClick: () => {
-      popupWithConfirm.open();
-      popupWithConfirm.setConfirmAction((evt) => {
-        evt.stopImmediatePropagation();
-        api.deleteCard(card._id)
-          .then(() => {
-            card.deleteCard();
-            popupWithConfirm.close();
-          }).catch((err) => console.log(err));
+      popupWithConfirm.open(); 
+      popupWithConfirm.setConfirmAction((evt) => { 
+        evt.stopImmediatePropagation(); 
+        api.deleteCard(card._id) 
+          .then(() => { 
+            card.deleteCard(); 
+            popupWithConfirm.close(); 
+          }).catch((err) => console.log(err)); 
       })
     },
     handleLikeClick: () => {
@@ -162,7 +162,6 @@ buttonEdit.addEventListener('click', function () {
 });
 
 buttonAvatar.addEventListener('click', function () {
-  const userAvatar = userInfo.getAvatar();
   popupAvatarChange.open();
   profileValidation.resetValidation();
 });
@@ -176,17 +175,6 @@ const defaultCardList = new Section({
 }, cardsContainerSelector);
 
 
-const getUserInfoFromApi = () => {
-  const userData = api.updateUserInfo();
-  userData.then((item) => {
-    userInfo.setUserInfo(item);
-    userId = item._id;
-    return item;
-  }).catch((err) => console.log(err));
-}
-getUserInfoFromApi();
-
-
 Promise.all([                 //в Promise.all передаем массив промисов которые нужно выполнить 
   api.updateUserInfo(),
   api.getAllCards()])
@@ -197,7 +185,7 @@ Promise.all([                 //в Promise.all передаем массив п�
   })
   .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
     console.log(err);
-  })
+})
 
 
 function renderLoading(isLoading, popup) {

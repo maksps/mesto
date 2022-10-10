@@ -25,7 +25,8 @@ export class Card {
         this._elementImage.alt = this._name;
         this._card.querySelector('.element__text').textContent = this._name;
         this._setListeners();
-        this._setCountLike();
+        // this._setCountLike();
+        this.changeLikeCount(this._item);
         this._setChekedLike();
         this._setButtonDelete();
         return this._card
@@ -51,9 +52,6 @@ export class Card {
         }
     }
 
-    _setCountLike = () => {
-        this._likeCount.textContent = this._likes.length;
-    }
 
     changeLikeCount = (item) => {
         this._likeCount.textContent = item.likes.length;
