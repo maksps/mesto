@@ -48,7 +48,6 @@ export default class Api {
         });
     }
     deleteCard(id) {
-        console.log(id);
         return fetch(`${this._url}${'cards/'}${id}`, {
             method: "DELETE",
             headers: this._headers,
@@ -72,7 +71,6 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         }).then((res) => {
-            console.log(res);
             return this._getResponseData(res);
         });
     }
